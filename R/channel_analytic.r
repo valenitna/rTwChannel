@@ -190,10 +190,10 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   day_favorite$date=as.Date(day_favorite$date)
   
   
-  ls_favorite_df=ls_favorite_df[order(-ls_favorite_df$N_favor),]
+  ls_favorite_df=ls_favorite_df[order(-ls_favorite_df$favoriteCount),]
   
   
-  rank_authors_favorite=aggregate(channel$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],
+  rank_authors_favorite=aggregate(channel_obj$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],
                                   list(channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)])
                                   ,sum)
   rank_authors_favorite=rank_authors_favorite[order(-rank_authors_favorite[,2]),]
@@ -250,7 +250,9 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   #######################################################################################
   # Create data.frame date,retweeted_authors and authors.
   
-  ls_retweeted_df=na.omit(data.frame(data=channel_obj$data,retweeted_authors=sapply(channel_obj$text,FUN=retweeted_users),authors=channel_obj$screeName))
+  ls_retweeted_df=na.omit(data.frame(data=channel_obj$data,
+                          retweeted_authors=sapply(channel_obj$text,FUN=retweeted_users),
+                          authors=channel_obj$screeName))
   
   
   #####################################################################################
@@ -387,6 +389,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   names(table_message)<-c("message","freq")
   
   rownames(table_message)<-NULL
+
   table_message$data=NA
   table_message$authors=NA
   
@@ -417,6 +420,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   
   
   ##########################################################################
+  if (only_original_tweet==FALSE) {
   
   table_authors_retweeter=as.data.frame.array(sort(table(ls_retweeted_df$authors),decreasing=T))
   
@@ -424,7 +428,11 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
                                      Freq=as.vector(table_authors_retweeter))
   names(table_authors_retweeter)<-c("authors_retweeter","freq")
   rownames(table_authors_retweeter)<-NULL
-  
+  }
+  else
+  {
+  table_authors_retweeter=data.frame(authors_retweeter=NA,freq=NA)
+  }
   ##########################################################################
   
   
