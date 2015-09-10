@@ -23,6 +23,8 @@ channel_analytic(channel_obj, start_date, end_date, Ntop = 11,
 
 \item{naming}{Character Indicate which naming framework is adopted.}
 
+\item{only_original_tweet}{Logical Taking into account only original. Default is FALSE  all tweets are considered.}
+
 \item{stopword}{Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.}
 }
 \value{
