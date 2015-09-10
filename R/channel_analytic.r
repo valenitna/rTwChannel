@@ -80,7 +80,7 @@
 #'
 #'
 
-channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="DISIT",only_original_tweet=FALSE,stopword = tm::stopwords("it")) {
+channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="",only_original_tweet=FALSE,stopword = tm::stopwords("it")) {
   
   #####################################################################################
   
@@ -135,6 +135,19 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   ls_tag=lapply(channel_obj$text,FUN=function(x) extract_mentions(x))
   ls_links=lapply(channel_obj$text,FUN=function(x) rm_url(x, extract=TRUE))
   
+  #####################################################################################
+  # Create data.frames for other count statistics.
+  
+  ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
+  
+  if (only_original_tweet==TRUE) { channel_obj=channel_obj[which(ls_retweet==FALSE),]}
+  
+  
+  
+  ls_lenhash=unlist(lapply(channel_obj$text,FUN=function(x) length(rm_hash(x,extract=T)[[1]])))
+  ls_lentag=unlist(lapply(channel_obj$text,FUN=function(x) length(extract_mentions(x)[[1]])))
+  ls_words=unlist(lapply(channel_obj$text,FUN=function(x) word_count(x)))
+
   ####################################################################################
   # Extract replies and organize a frame
   
@@ -160,13 +173,8 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   
   
   
-  #####################################################################################
-  # Create data.frames for other count statistics.
-  
-  ls_lenhash=unlist(lapply(channel_obj$text,FUN=function(x) length(rm_hash(x,extract=T)[[1]])))
-  ls_lentag=unlist(lapply(channel_obj$text,FUN=function(x) length(extract_mentions(x)[[1]])))
-  ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
-  ls_words=unlist(lapply(channel_obj$text,FUN=function(x) word_count(x)))
+    
+ 
   
   #######################################################################################
   # Create data.frame date,message and authors.
