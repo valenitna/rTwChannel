@@ -159,7 +159,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   ####################################################################################
   # Replies stats
   
-  fullretweet_day=aggregate(channel_obj$retweetCount,list(channel_obj$data),sum,na.rm = TRUE)
+  fullretweet_day=aggregate(channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)],list(channel_obj$data),sum,na.rm = TRUE)
   names(fullretweet_day)=c("date","retweetCount")
   fullretweet_day$date=as.Date(fullretweet_day$date)
   
@@ -167,8 +167,8 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   names(fullreplies_day)=c("date","repliesCount")
   fullreplies_day$date=as.Date(fullreplies_day$date)
   
-  fullretweet_missing=length(which(is.na(channel_obj$retweetCount)))
-  fullretweet_channel_stat_sum=sum(channel_obj$retweetCount,na.rm=T)
+  fullretweet_missing=length(which(is.na(channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)])))
+  fullretweet_channel_stat_sum=sum(channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)],na.rm=T)
   replies_channel_stat_sum=length(replies_id)
   
   
