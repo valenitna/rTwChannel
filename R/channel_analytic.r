@@ -196,7 +196,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   #########################################################################
   
   
-  ls_message_df=data.frame(data=channel_obj$data,message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],retweetCount=channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)],is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
+  ls_message_df=data.frame(data=channel_obj$data[which(!duplicated(channel_obj$text)==TRUE)],message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],retweetCount=channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)],is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
   
   rank_authors_retweet=aggregate(ls_message_df$retweetCount,list(ls_message_df$authors),sum)
   rank_authors=rank_authors_retweet[order(-rank_authors_retweet[,2]),]
