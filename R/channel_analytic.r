@@ -190,7 +190,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   day_favorite$date=as.Date(day_favorite$date)
   
   
-  ls_favorite_df=ls_favorite_df[order(-rank_authors_favorite$favoriteCount),]
+  ls_favorite_df=ls_favorite_df[order(-ls_favorite_df$N_favor),]
   
   
   rank_authors_favorite=aggregate(channel$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],
