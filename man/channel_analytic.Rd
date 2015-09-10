@@ -5,7 +5,7 @@
 \title{channel_analytic}
 \usage{
 channel_analytic(channel_obj, start_date, end_date, Ntop = 11,
-  temporal_check = FALSE, Nmin = 25, naming = "DISIT",
+  temporal_check = FALSE, Nmin = 25, naming = "",only_original_tweet=FALSE
   stopword = tm::stopwords("it"))
 }
 \arguments{
