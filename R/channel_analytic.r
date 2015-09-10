@@ -9,6 +9,7 @@
 #' @param  temporal_check Logical indicate if exist time consistency between dates and data
 #' @param  Nmin Integer indicate the minimal data numerosity
 #' @param  naming Character Indicate which naming framework is adopted.
+#' @param  only_original_tweet Logical Taking into account only original. Default all tweets are considered.
 #' @param  stopword Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.
 #' @return Return a R list of object useful for channel analisys
 #' @return channel_stat : channel summaries of following parameters.
@@ -79,7 +80,7 @@
 #'
 #'
 
-channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="DISIT",stopword = tm::stopwords("it")) {
+channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="DISIT",only_original_tweet=FALSE,stopword = tm::stopwords("it")) {
   
   #####################################################################################
   
