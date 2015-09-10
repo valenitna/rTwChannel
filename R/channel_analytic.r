@@ -179,7 +179,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   #######################################################################################
   # Create data.frame date,message and authors.
   
-  ls_favorite_df=data.frame(data=channel_obj$data,message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],favoriteCount=channel_obj$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
+  ls_favorite_df=data.frame(data=channel_obj$data[which(!duplicated(channel_obj$text)==TRUE)],message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],favoriteCount=channel_obj$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
   
   day_favorite=aggregate(ls_favorite_df$favoriteCount,list(ls_favorite_df$data),sum)
   names(day_favorite)<-c("date","N_favor")
