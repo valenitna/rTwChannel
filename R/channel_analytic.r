@@ -179,7 +179,11 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   #######################################################################################
   # Create data.frame date,message and authors.
   
-  ls_favorite_df=data.frame(data=channel_obj$data[which(!duplicated(channel_obj$text)==TRUE)],message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],favoriteCount=channel_obj$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
+  ls_favorite_df=data.frame(data=channel_obj$data[which(!duplicated(channel_obj$text)==TRUE)],
+                            message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],
+                            authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],
+                            favoriteCount=channel_obj$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],
+                            is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
   
   day_favorite=aggregate(ls_favorite_df$favoriteCount,list(ls_favorite_df$data),sum)
   names(day_favorite)<-c("date","N_favor")
@@ -189,14 +193,20 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   ls_favorite_df=ls_favorite_df[order(-rank_authors_favorite$favoriteCount),]
   
   
-  rank_authors_favorite=aggregate(channel$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],list(channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)]),sum)
+  rank_authors_favorite=aggregate(channel$favoriteCount[which(!duplicated(channel_obj$text)==TRUE)],
+                                  list(channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)])
+                                  ,sum)
   rank_authors_favorite=rank_authors_favorite[order(-rank_authors_favorite[,2]),]
   names(rank_authors_favorite)<-c("authors","favoriteCount")
   
   #########################################################################
   
   
-  ls_message_df=data.frame(data=channel_obj$data[which(!duplicated(channel_obj$text)==TRUE)],message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],retweetCount=channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)],is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
+  ls_message_df=data.frame(data=channel_obj$data[which(!duplicated(channel_obj$text)==TRUE)],
+                          message=channel_obj$text[which(!duplicated(channel_obj$text)==TRUE)],
+                          authors=channel_obj$screeName[which(!duplicated(channel_obj$text)==TRUE)],
+                          retweetCount=channel_obj$retweetCount[which(!duplicated(channel_obj$text)==TRUE)],
+                          is.retweet=ls_retweet[which(!duplicated(channel_obj$text)==TRUE)])
   
   rank_authors_retweet=aggregate(ls_message_df$retweetCount,list(ls_message_df$authors),sum)
   rank_authors=rank_authors_retweet[order(-rank_authors_retweet[,2]),]
