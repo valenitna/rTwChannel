@@ -11,4 +11,4 @@
 #'
 #' @export
 
-is.retweet=function(x) {return(grepl("^RT",x))}
+is.retweet=function(x) {return(grepl("^(.*)(:*)RT",x))}
