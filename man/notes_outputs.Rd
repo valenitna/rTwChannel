@@ -5,7 +5,7 @@
 \title{notes_outputs}
 \usage{
 notes_outputs(daily_stat, stat_notes, prefix_file = "notes", na_string = "",
-  filecsv = TRUE, html = TRUE, excel = TRUE)
+  filecsv = TRUE, html = TRUE, excel = TRUE,daily_unique=FALSE)
 }
 \arguments{
 \item{daily_stat}{data.frame Daily statistics obtained by channel_analytic}
