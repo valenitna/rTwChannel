@@ -22,7 +22,7 @@ create_state_obj = function(x,notes,save=TRUE,fileName="") {
 
   for ( i in 1:length(notes))
   {   
-  notes[[i]]=notes[[i]][!duplicated(notes[[i]]),])
+  notes[[i]]=notes[[i]][!duplicated(notes[[i]]),]
   res[[i]] = stat_notes(x,notes[[i]])
   }
   if ( save == TRUE) {
