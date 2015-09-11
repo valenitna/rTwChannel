@@ -68,7 +68,7 @@ channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_s
   
   if (param=="daily_stat") { res[,6:8]=round(res[,6:8],1) }
   
-  if ( filescsv == TRUE) {
+  if ( filecsv == TRUE) {
     write.csv(res,paste0(param,"_",suffix_file,".csv"),na=na_string,row.names = F)
     
   }
