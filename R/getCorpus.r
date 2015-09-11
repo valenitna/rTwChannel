@@ -19,7 +19,7 @@ getCorpus <-function(textVector, hashtag=FALSE)
   {textVector=rm_hash(textVector)}
   textVector=rm_url(textVector)
   textVector=trim_users(textVector)
-  textVector=clean_unicode(textVector)
+  # textVector=clean_unicode(textVector)
   doc.corpus <- Corpus(VectorSource(textVector))
   doc.corpus <- tm_map(doc.corpus, tolower)
   doc.corpus <- tm_map(doc.corpus, removeNumbers)
