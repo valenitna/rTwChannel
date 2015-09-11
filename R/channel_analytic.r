@@ -390,10 +390,10 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   daily_stat=merge(daily_stat,fullreplies_day,all.x=T)
   daily_stat=merge(daily_stat,day_favorite,all.x=T)
   
-  daily_stat$retweet_ratio=round(daily_stat$retweet_ratio,2)
-  daily_stat$Nmean_hashtag=round(daily_stat$N_hashtag,2)	
-  daily_stat$Nmean_mentions=round(daily_stat$N_mentions,2)	
-  daily_stat$Nmean_words=round(daily_stat$rN_words,2)
+  daily_stat$retweet_ratio=round(as.numeric(daily_stat$retweet_ratio),2)
+  daily_stat$Nmean_hashtag=round(as.numeric(daily_stat$Nmean_hashtag),2)	
+  daily_stat$Nmean_mentions=round(as.numeric(daily_stat$Nmean_mentions),2)	
+  daily_stat$Nmean_words=round(as.numeric(daily_stat$Nmean_words),2)
   
   #################################################################################
   # Frequency analisys
