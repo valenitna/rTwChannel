@@ -18,6 +18,8 @@ stat_notes=function (x, notes)
 {
     require(qdap)
     require(qdapTools)
+    require(data.table)
+    
     options(warn = -1)
     x[,2] = tolower(x[,2])
     x[,2] = gsub("^@", "", x[, 2])
@@ -25,7 +27,9 @@ stat_notes=function (x, notes)
     x_unique = unique(x[,1:2])
     terms=x[,2]
     terms_unique=x_unique[,2]
+    mapnotes=data.frame(data=x[,1],note_target=terms,authors=x$authors,noteterms=notes[terms]$y)
+    mapnotes_unique =data.frame(data=x_unique[,1],note_target=terms_unique,noteterms=notes[terms_unique]$y)
    
-    return(terms_unique)
+    return(mapnotes_unique)
     options(warn = 0)
 }
