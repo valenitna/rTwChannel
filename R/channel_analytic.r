@@ -140,9 +140,12 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   
   ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
   
-  if (only_original_tweet==TRUE) { channel_obj=channel_obj[which(ls_retweet==FALSE),]}
+  if (only_original_tweet==TRUE) { channel_obj=channel_obj[which(ls_retweet==FALSE),]
+                                   
+                                 }
   
-  
+  if (only_original_tweet==TRUE) { ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
+                                 }
   
   ls_lenhash=unlist(lapply(channel_obj$text,FUN=function(x) length(rm_hash(x,extract=T)[[1]])))
   ls_lentag=unlist(lapply(channel_obj$text,FUN=function(x) length(extract_mentions(x)[[1]])))
