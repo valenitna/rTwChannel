@@ -21,9 +21,7 @@ create_state_obj = function(x,notes,save=TRUE,fileName="") {
   res=list()
 
   for ( i in seq_along(notes))
-  { notes_temp = notes[[i]]
-    notes_temp = notes_temp[!duplicated(notes_temp),]
-    res[[i]] = stat_notes(x,notes_temp)
+  {   res[[i]] = stat_notes(x,notes)
   }
   if ( save == TRUE) {
                     saveRDS(res,file=paste0(fileName,".rds"))
