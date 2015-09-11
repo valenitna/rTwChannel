@@ -9,6 +9,7 @@
 #' @param  filecsv logical export csv files.
 #' @param  html logical export html sjPlot files.
 #' @param  excel logical export excel files.
+#' @param  daily_unique logical export daily stats of unique.
 #' @return A list of daily statistics  data, the unique one and full aggregate stats.
 #' @author  Istituto di Biometeorologia Firenze Italy  Alfonso crisci \email{a.crisci@@ibimet.cnr.it}
 #' @keywords  annotation
@@ -19,7 +20,7 @@
 #'
 #'
 
-notes_outputs=function(daily_stat,stat_notes,prefix_file="notes",na_string="",filecsv=TRUE,html=TRUE,excel=TRUE){
+notes_outputs=function(daily_stat,stat_notes,prefix_file="notes",na_string="",filecsv=TRUE,html=TRUE,excel=TRUE,daily_unique=FALSE){
   require(sjPlot)
   require(sjmisc)
   require(XLConnect)
@@ -49,12 +50,16 @@ notes_outputs=function(daily_stat,stat_notes,prefix_file="notes",na_string="",fi
   
   if ( filecsv == TRUE) {
     write.csv(res$daily_stat_df,paste0(prefix_file,"_daily_stat.csv"),na=na_string,row.names = F)
+    if ( daily_unique == TRUE) {
     write.csv(res$daily_stat_df_unique,paste0(prefix_file,"_daily_stat_unique.csv"),na=na_string,row.names = F)
+    }
     write.csv(res$stat_full,paste0(prefix_file,"_stat_full.csv"),na=na_string,row.names = F)
   }
   if ( html == TRUE) {
     sjt.df(res$daily_stat_df,stringVariable = "Daily_stat",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_daily_stat.html"))
+    if ( daily_unique == TRUE) {
     sjt.df(res$daily_stat_df_unique,stringVariable = "Daily_stat_unique",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_daily_stat_unique.html"))
+    }
     sjt.df(res$stat_full,stringVariable =  "Full_stat",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_stat_full.html"))
     
   }
@@ -62,7 +67,9 @@ notes_outputs=function(daily_stat,stat_notes,prefix_file="notes",na_string="",fi
   if ( excel == TRUE) {
     
     writeWorksheetToFile(paste0(prefix_file,"_daily_stat.xls"), res$daily_stat_df, sheet=paste0("Daily_stat"))
+    if ( daily_unique == TRUE) {
     writeWorksheetToFile(paste0(prefix_file,"_daily_stat_unique.xls"), res$daily_stat_df_unique, sheet=paste0("Daily_stat_unique"))
+    }
     writeWorksheetToFile(paste0(prefix_file,"_stat_full.xls"), res$stat_full, sheet=paste0("Full_stats"))
     
   }
