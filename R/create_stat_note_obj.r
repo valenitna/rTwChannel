@@ -3,7 +3,9 @@
 #' @description Create a stat note object from time list of hashtag 
 #'
 #' @param  x  data.frame  Terms or user date list object from \code{channel_analytics}
-#' @param  qdap_hash Annotation file 
+#' @param  notes qdap_hash Annotation file 
+#' @param  save logical  If a rds file is generated 
+#' @param  fileName character 
 #' @return list Return stat object
 #' @author  Istituto di Biometeorologia Firenze Italy  Alfonso Crisci \email{a.crisci@@ibimet.cnr.it}
 #' @keywords  match
