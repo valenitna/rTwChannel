@@ -7,7 +7,7 @@
 native_channel(channel)
 }
 \arguments{
-\item{channel}{data.frame  Channel object}
+\item{channel}{data.frame  channel object}
 }
 \value{
 channel_obj data.frame Return a data.frame

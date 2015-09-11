@@ -9,7 +9,11 @@ create_state_obj(x, notes, save = TRUE, fileName = "")
 \arguments{
 \item{x}{data.frame  Terms or user date list object from \code{channel_analytics}}
 
-\item{qdap_hash}{Annotation file}
+\item{notes}{qdap_hash Annotation file}
+
+\item{save}{logical  If a rds file is generated}
+
+\item{fileName}{character}
 }
 \value{
 list Return stat object
