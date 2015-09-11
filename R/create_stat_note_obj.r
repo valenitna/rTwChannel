@@ -26,7 +26,7 @@ create_state_obj=function(x,notes,save=TRUE,fileName="") {
     res[[i]]=stat_notes(x,notes_temp)
   }
   if ( save ==TRUE) {
-                    saveRDS(res,file=paste0("fileName",".rds"))
+                    saveRDS(res,file=paste0(fileName,".rds"))
   }
   return(res)
   }
