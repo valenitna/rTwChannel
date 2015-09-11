@@ -314,6 +314,12 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
   retweet_df_stats=as.data.frame.matrix(table(retweet_df$data,retweet_df$is.retweet))
+  
+  if(names(retweet_df_stats)[1] =="FALSE") {names(retweet_df_stats)[1] ="false"}
+  if(names(retweet_df_stats)[1] =="TRUE") {names(retweet_df_stats)[1] ="true"}
+  
+  if (only_original_tweet==TRUE) { retweet_df_stats$true=rep(0,as.numeric(nrow(retweet_df_stats)))}
+  
   retweet_df_stats$ratio=retweet_df_stats[,2]/retweet_df_stats[,1]
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==Inf)]=NA
   retweet_stat=data.frame(date=as.Date(rownames(retweet_df_stats)),
@@ -423,16 +429,14 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   if (only_original_tweet==FALSE) {
   
   table_authors_retweeter=as.data.frame.array(sort(table(ls_retweeted_df$authors),decreasing=T))
-  
   table_authors_retweeter=data.frame(authors=rownames(table_authors_retweeter),
                                      Freq=as.vector(table_authors_retweeter))
   names(table_authors_retweeter)<-c("authors_retweeter","freq")
   rownames(table_authors_retweeter)<-NULL
   }
-  else
-  {
+  if (only_original_tweet==TRUE){
   table_authors_retweeter=data.frame(authors_retweeter=NA,freq=NA)
-  }
+  };
   ##########################################################################
   
   
