@@ -416,15 +416,17 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   
   
   ##########################################################################
-  
+  if (only_original_tweet==FALSE) {
   table_authors_retweeted=as.data.frame.array(sort(table(ls_retweeted_df$retweeted_authors),decreasing=T))
   
   table_authors_retweeted=data.frame(authors=rownames(table_authors_retweeted),
                                      Freq=as.vector(table_authors_retweeted))
   names(table_authors_retweeted)<-c("authors_retweeted","freq")
   rownames(table_authors_retweeted)<-NULL
-  
-  
+  }
+  if (only_original_tweet==TRUE){
+  table_authors_retweeted=data.frame(authors_retweeted=NA,freq=NA)
+  };
   ##########################################################################
   if (only_original_tweet==FALSE) {
   
