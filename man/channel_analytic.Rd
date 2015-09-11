@@ -5,8 +5,8 @@
 \title{channel_analytic}
 \usage{
 channel_analytic(channel_obj, start_date, end_date, Ntop = 11,
-  temporal_check = FALSE, Nmin = 25, naming = "",only_original_tweet=FALSE
-  stopword = tm::stopwords("it"))
+  temporal_check = FALSE, Nmin = 25, naming = "",
+  only_original_tweet = FALSE, stopword = tm::stopwords("it"))
 }
 \arguments{
 \item{channel_obj}{Data.frame Dataset of tweets}
@@ -23,7 +23,7 @@ channel_analytic(channel_obj, start_date, end_date, Ntop = 11,
 
 \item{naming}{Character Indicate which naming framework is adopted.}
 
-\item{only_original_tweet}{Logical Taking into account only original. Default is FALSE  all tweets are considered.}
+\item{only_original_tweet}{Logical Taking into account only original. Default all tweets are considered.}
 
 \item{stopword}{Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.}
 }

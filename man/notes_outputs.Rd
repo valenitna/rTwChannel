@@ -5,7 +5,7 @@
 \title{notes_outputs}
 \usage{
 notes_outputs(daily_stat, stat_notes, prefix_file = "notes", na_string = "",
-  filecsv = TRUE, html = TRUE, excel = TRUE,daily_unique=FALSE)
+  filecsv = TRUE, html = TRUE, excel = TRUE, daily_unique = FALSE)
 }
 \arguments{
 \item{daily_stat}{data.frame Daily statistics obtained by channel_analytic}
@@ -22,8 +22,7 @@ notes_outputs(daily_stat, stat_notes, prefix_file = "notes", na_string = "",
 
 \item{excel}{logical export excel files.}
 
-\item{daily_unique}{logical logical export daily stats of unique. Default is FALSE}
-
+\item{daily_unique}{logical export daily stats of unique.}
 }
 \value{
 A list of daily statistics  data, the unique one and full aggregate stats.
