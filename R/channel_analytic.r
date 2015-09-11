@@ -304,15 +304,15 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   
   lenhash_df=data.frame(data=as.Date(channel_obj$data),lenhash=ls_lenhash)
   lenhash_df_day_mean=aggregate(lenhash_df$lenhash,list(lenhash_df$data),mean)
-  names(lenhash_df_day_mean)=c("date","N_hashtag")
+  names(lenhash_df_day_mean)=c("date","Nmean_hashtag")
   
   lentag_df=data.frame(data=as.Date(channel_obj$data),lentag=ls_lentag)
   lentag_df_day_mean=aggregate(lentag_df$lentag,list(lentag_df$data),mean)
-  names(lentag_df_day_mean)=c("date","N_mentions")
+  names(lentag_df_day_mean)=c("date","Nmean_mentions")
   
   lenwords_df=data.frame(data=as.Date(channel_obj$data),lenwords=ls_words)
   lenwords_df_day_mean=aggregate(lenwords_df$lenwords,list(lenwords_df$data),mean)
-  names(lenwords_df_day_mean)=c("date","N_words")
+  names(lenwords_df_day_mean)=c("date","Nmean_words")
   
   ##############################################################################
   # retweet stats the ratio is ever ntive retweet/ native
@@ -389,6 +389,11 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   daily_stat=merge(daily_stat,fullretweet_day,all.x=T)
   daily_stat=merge(daily_stat,fullreplies_day,all.x=T)
   daily_stat=merge(daily_stat,day_favorite,all.x=T)
+  
+  daily_stat$retweet_ratio=round(daily_stat$retweet_ratio,2)
+  daily_stat$Nmean_hashtag=round(daily_stat$N_hashtag,2)	
+  daily_stat$Nmean_mentions=round(daily_stat$N_mentions,2)	
+  daily_stat$Nmean_words=round(daily_stat$rN_words,2)
   
   #################################################################################
   # Frequency analisys
