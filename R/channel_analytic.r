@@ -128,13 +128,7 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
     if (as.Date(end_date) > as.Date(tail(analitic_full_LIG_institution$data,1))) { stop("End Date of analisys not present." )};
     channel_obj=channel_obj[min(which(channel_obj$data==as.character(start_date))):max(which(channel_obj$data==as.character(end_date))),]
   }
-  ####################################################################################
-  # Create lists to be used for count statistics.
-  
-  ls_hash=lapply(channel_obj$text,FUN=function(x) rm_hash(x,extract=T))
-  ls_tag=lapply(channel_obj$text,FUN=function(x) extract_mentions(x))
-  ls_links=lapply(channel_obj$text,FUN=function(x) rm_url(x, extract=TRUE))
-  
+   
   #####################################################################################
   # Create data.frames for other count statistics.
   
@@ -147,6 +141,14 @@ channel_analytic=function(channel_obj,start_date, end_date,Ntop=11,temporal_chec
   if (only_original_tweet==TRUE) { ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
                                  }
   
+  
+   ####################################################################################
+  # Create lists to be used for count statistics.
+  
+  ls_hash=lapply(channel_obj$text,FUN=function(x) rm_hash(x,extract=T))
+  ls_tag=lapply(channel_obj$text,FUN=function(x) extract_mentions(x))
+  ls_links=lapply(channel_obj$text,FUN=function(x) rm_url(x, extract=TRUE))
+
   ls_lenhash=unlist(lapply(channel_obj$text,FUN=function(x) length(rm_hash(x,extract=T)[[1]])))
   ls_lentag=unlist(lapply(channel_obj$text,FUN=function(x) length(extract_mentions(x)[[1]])))
   ls_words=unlist(lapply(channel_obj$text,FUN=function(x) word_count(x)))
