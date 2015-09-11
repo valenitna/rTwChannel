@@ -20,7 +20,7 @@ create_state_obj = function(x,notes,save=TRUE,fileName="") {
   
   res=list()
 
-  for ( i in seq_along(notes))
+  for ( i in 1:length(notes))
   {   res[[i]] = stat_notes(x,notes)
   }
   if ( save == TRUE) {
