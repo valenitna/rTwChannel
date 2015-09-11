@@ -21,6 +21,9 @@ notes_outputs(daily_stat, stat_notes, prefix_file = "notes", na_string = "",
 \item{html}{logical export html sjPlot files.}
 
 \item{excel}{logical export excel files.}
+
+\item{daily_unique}{logical logical export daily stats of unique. Default is FALSE}
+
 }
 \value{
 A list of daily statistics  data, the unique one and full aggregate stats.
