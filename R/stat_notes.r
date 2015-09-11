@@ -18,7 +18,7 @@ stat_notes=function(x,notes) {
   
   require(qdap)
   require(qdapTools)
-  
+  options( warn = -1)
   x[,2]=tolower(x[,2])
   label_notes=notes$y[1]
   x_unique=unique(x)
@@ -30,8 +30,14 @@ stat_notes=function(x,notes) {
   mapnotes_unique$data=x_unique$data
   mapnotes=na.omit(mapnotes)
   mapnotes_unique=na.omit(mapnotes_unique)
-  freq_day=mapnotes[,.N,by = data]
-  freq_day_unique=mapnotes_unique[,.N,by = data]
+  freq_day=as.data.frame(as.matrix(table(mapnotes$data)))
+  names(freq_day)=c("N")
+  freq_day$data=rownames(freq_day)
+  rownames(freq_day)<-NULL
+  freq_day_unique=as.data.frame(as.matrix(table(mapnotes_unique$data)))
+  names(freq_day_unique)=c("N")
+  freq_day_unique$data=rownames(freq_day_unique)
+  rownames(freq_day_unique)<-NULL
   res=list()
   res$df=data.frame(freq_day$data,freq_day$N)
   res$df_unique=data.frame(freq_day_unique$data,freq_day_unique$N)
@@ -40,5 +46,5 @@ stat_notes=function(x,notes) {
   res$N=nrow(na.omit(mapnotes))
   res$N_sumuniquedate=nrow(na.omit(mapnotes_unique))
   return(res)
-  
+  options(warn=0)
 }
