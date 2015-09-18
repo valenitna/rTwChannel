@@ -4,7 +4,6 @@
 #'
 #' @param  channel  list  Name of channel in repository
 #' @param  label_notes  character  Vector of annotation category
-#' @param  category  character  Annotation category
 #' @param  target  character  Target of annotation ( user, hashtag, geonames or other)
 #' @param  save  logical  Save the files in rds format
 #' @param  filerds  character  Name of file of rds
@@ -18,7 +17,7 @@
 #'
 #'
 
-retrieve_full_notes=function(channel, label_notes,category,target,save=TRUE,filerds="notes.rds" ) {
+retrieve_full_notes=function(channel, label_notes,category,save=TRUE,filerds="notes.rds" ) {
   require(curl)
   require(qdapTools)
   res_notes=list()
