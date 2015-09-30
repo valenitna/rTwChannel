@@ -37,9 +37,9 @@ channel_analytic(channel_obj, use_channel_dates = TRUE, start_date, end_date,
 \value{
 Return a R list object  for channel analisys
 
-channel_stat : channel summaries of following parameters.
+**channel_stat** : channel summaries of following parameters.
 
-*        N_tweets : Number of tweet within unique ID
+*        *N_tweets* : Number of tweet within unique ID
 
 *        N_retweets  (channel_stat):Number of retweet
 
@@ -87,87 +87,89 @@ channel_stat : channel summaries of following parameters.
 
 *        NtweetsNhashs (channel_stat): Number of tweets more than hashtags
 
-table_message :  Frequency data.frame of message
+**table_message** :  Frequency data.frame of message
 
-table_hash :  Frequency data.frame of hashtag
+**table_hash** :  Frequency data.frame of hashtag
 
-table_mentions :  Frequency data.frame of mentions
+**table_mentions** :  Frequency data.frame of mentions
 
-table_authors :  Frequency data.frame of authors
+**table_authors** :  Frequency data.frame of authors
 
-table_replies :  Frequency data.frame of replies
+**table_replies** :  Frequency data.frame of replies
 
-table_authors_retweeted  :  Frequency data.frame of authors retweeted
+**table_authors_retweeted**  :  Frequency data.frame of authors retweeted
 
-table_authors_retweeter :  Frequency data.frame of authors that is a retweeter
+**table_authors_retweeter** :  Frequency data.frame of authors that is a retweeter
 
-rank_authors_retweet :  Frequency data.frame of retweet by using platform data
+**rank_authors_retweet** :  Frequency data.frame of retweet by using platform data
 
-rank_message_retweet :  Frequency data.frame of message by using platform data
+**rank_message_retweet** :  Frequency data.frame of message by using platform data
 
-top_message :  TopN messages in channel
+**top_message** :  TopN messages in channel
 
-top_authors :  TopN authors in channel
+**top_authors** :  TopN authors in channel
 
-top_hash :  TopN hashtag
+**top_hash** :  TopN hashtag
 
-top_mentions :  TopN user mentioned
+**top_mentions** :  TopN user mentioned
 
-top_replies :  TopN user have made replies
+**top_replies** :  TopN user have made replies
 
-top_authors_retweeted :  TopN user that have retweeted in channel
+**top_authors_retweeted** :  TopN user that have retweeted in channel
 
-top_authors_retweeter :  TopN user that have made retweet in channel
+**top_authors_retweeter** :  TopN user that have made retweet in channel
 
-topfull_authors_retweeted :  TopN author that have retweeted in platform
+**topfull_authors_retweeted** :  TopN author that have retweeted in platform
 
-topfull_message_retweeted :  TopN message that have retweeted in platform
+**topfull_message_retweeted** :  TopN message that have retweeted in platform
 
-daily_stat :  Daily Temporal data of channel statistic data
+**daily_stat** :  Daily Temporal data of channel statistic data
 
-authors_date :  DateTime authors activity in channel
+**authors_date** :  DateTime authors activity in channel
 
-links_date :  DateTime authors activity in channel
+**links_date** :  DateTime authors activity in channel
 
-hash_date :  DateTime hashtag presence in channel
+**hash_date** :  DateTime hashtag presence in channel
 
-mentions_date :  DateTime mentions presence in channel
+**mentions_date** :  DateTime mentions presence in channel
 
-unique_message :  Unique message in channel
+**unique_message** :  Unique message in channel
 
-unique_authors :  Unique authors in channel
+**unique_authors** :  Unique authors in channel
 
-unique_hash :  Unique hashtag in channel
+**unique_hash** :  Unique hashtag in channel
 
-unique_mentions :  Unique mentions in channel
+**unique_mentions** :  Unique mentions in channel
 
-unique_authors_retweeted :  Unique retweeted user in channel
+**unique_authors_retweeted** :  Unique retweeted user in channel
 
-unique_authors_retweeter :  Unique retweeter user in channel
+**unique_authors_retweeter** :  Unique retweeter user in channel
 
-uniquefull_authors_retweeted :  Unique retweeted user in platform
+**uniquefull_authors_retweeted** :  Unique retweeted user in platform
 
-uniquefull_message_retweeted :  Unique retweeted message in platform
+**uniquefull_message_retweeted** :  Unique retweeted message in platform
 
-graph_retweet_df :   Data used for retweet graph
+**graph_retweet_df** :   Data used for retweet graph
 
-graph_hash_df :  Data used for hashtag graph
+**graph_hash_df** :  Data used for hashtag graph
 
-graph_mentions_df :  Data for used mention graph
+**graph_mentions_df** :  Data for used mention graph
 
-replies_df :  Data for replies
+**replies_df** :  Data for replies
 
-graph_retweet :   Retweet graph object as igraph R object
+**graph_retweet** :   Retweet graph object as igraph R object
 
-graph_mentions :   Mention graph object as igraph R object
+**graph_mentions** :   Mention graph object as igraph R object
 
-authors_favorite :   rank of authors favorite
+**authors_favorite** :   rank of authors favorite
 
-favorite_message_top :   TopN favorite message
+**favorite_message_top** :   TopN favorite message
 
-channel_corpus :   Tm Corpus of messages without mentions and links and optionally without hashtag
+**channel_data** :   Channel_data
 
-word_freq_matr :   qdap wfm object Word frequency matrix.
+**channel_corpus** :   Tm Corpus of messages without mentions and links and optionally without hashtag
+
+**word_freq_matr** :   qdap wfm object Word frequency matrix.
 }
 \description{
 Extract many informative stats and object  from a set of tweet messages parsed as channel

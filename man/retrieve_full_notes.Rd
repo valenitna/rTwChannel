@@ -12,11 +12,11 @@ retrieve_full_notes(channel, label_notes, category, save = TRUE,
 
 \item{label_notes}{character  Vector of annotation category}
 
+\item{category}{character  Target of annotation ( user, hashtag, geonames or other)}
+
 \item{save}{logical  Save the files in rds format}
 
 \item{filerds}{character  Name of file of rds}
-
-\item{target}{character  Target of annotation ( user, hashtag, geonames or other)}
 }
 \value{
 Return a qdap hash keylist  with key and category

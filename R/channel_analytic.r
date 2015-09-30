@@ -15,8 +15,8 @@
 #' @param  corpus_hashtag logical Corpus not taking into account the hashtag.
 #' @param  account_tw User account if naming parameter is an "account_statistics"
 #' @return Return a R list object  for channel analisys
-#' @return channel_stat : channel summaries of following parameters.
-#' @return *        N_tweets : Number of tweet within unique ID
+#' @return **channel_stat** : channel summaries of following parameters.
+#' @return *        *N_tweets* : Number of tweet within unique ID
 #' @return *        N_retweets  (channel_stat):Number of retweet
 #' @return *        N_native_tweets (channel_stat):Number of original tweets
 #' @return *        N_hash  (channel_stat):Number of hashtags detected in channel
@@ -40,47 +40,48 @@
 #' @return *        Ntweets0hashs (channel_stat): Number of  tweets with no hashtags
 #' @return *        Ntweets1hash (channel_stat): Number of  tweets with 1 hashtag
 #' @return *        NtweetsNhashs (channel_stat): Number of tweets more than hashtags
-#' @return table_message :  Frequency data.frame of message
-#' @return table_hash :  Frequency data.frame of hashtag
-#' @return table_mentions :  Frequency data.frame of mentions
-#' @return table_authors :  Frequency data.frame of authors
-#' @return table_replies :  Frequency data.frame of replies
-#' @return table_authors_retweeted  :  Frequency data.frame of authors retweeted
-#' @return table_authors_retweeter :  Frequency data.frame of authors that is a retweeter
-#' @return rank_authors_retweet :  Frequency data.frame of retweet by using platform data
-#' @return rank_message_retweet :  Frequency data.frame of message by using platform data
-#' @return top_message :  TopN messages in channel
-#' @return top_authors :  TopN authors in channel
-#' @return top_hash :  TopN hashtag
-#' @return top_mentions :  TopN user mentioned
-#' @return top_replies :  TopN user have made replies
-#' @return top_authors_retweeted :  TopN user that have retweeted in channel
-#' @return top_authors_retweeter :  TopN user that have made retweet in channel
-#' @return topfull_authors_retweeted :  TopN author that have retweeted in platform
-#' @return topfull_message_retweeted :  TopN message that have retweeted in platform
-#' @return daily_stat :  Daily Temporal data of channel statistic data
-#' @return authors_date :  DateTime authors activity in channel
-#' @return links_date :  DateTime authors activity in channel
-#' @return hash_date :  DateTime hashtag presence in channel
-#' @return mentions_date :  DateTime mentions presence in channel
-#' @return unique_message :  Unique message in channel
-#' @return unique_authors :  Unique authors in channel
-#' @return unique_hash :  Unique hashtag in channel
-#' @return unique_mentions :  Unique mentions in channel
-#' @return unique_authors_retweeted :  Unique retweeted user in channel
-#' @return unique_authors_retweeter :  Unique retweeter user in channel
-#' @return uniquefull_authors_retweeted :  Unique retweeted user in platform
-#' @return uniquefull_message_retweeted :  Unique retweeted message in platform
-#' @return graph_retweet_df :   Data used for retweet graph
-#' @return graph_hash_df :  Data used for hashtag graph
-#' @return graph_mentions_df :  Data for used mention graph
-#' @return replies_df :  Data for replies
-#' @return graph_retweet :   Retweet graph object as igraph R object
-#' @return graph_mentions :   Mention graph object as igraph R object
-#' @return authors_favorite :   rank of authors favorite
-#' @return favorite_message_top :   TopN favorite message
-#' @return channel_corpus :   Tm Corpus of messages without mentions and links and optionally without hashtag
-#' @return word_freq_matr :   qdap wfm object Word frequency matrix.
+#' @return **table_message** :  Frequency data.frame of message
+#' @return **table_hash** :  Frequency data.frame of hashtag
+#' @return **table_mentions** :  Frequency data.frame of mentions
+#' @return **table_authors** :  Frequency data.frame of authors
+#' @return **table_replies** :  Frequency data.frame of replies
+#' @return **table_authors_retweeted**  :  Frequency data.frame of authors retweeted
+#' @return **table_authors_retweeter** :  Frequency data.frame of authors that is a retweeter
+#' @return **rank_authors_retweet** :  Frequency data.frame of retweet by using platform data
+#' @return **rank_message_retweet** :  Frequency data.frame of message by using platform data
+#' @return **top_message** :  TopN messages in channel
+#' @return **top_authors** :  TopN authors in channel
+#' @return **top_hash** :  TopN hashtag
+#' @return **top_mentions** :  TopN user mentioned
+#' @return **top_replies** :  TopN user have made replies
+#' @return **top_authors_retweeted** :  TopN user that have retweeted in channel
+#' @return **top_authors_retweeter** :  TopN user that have made retweet in channel
+#' @return **topfull_authors_retweeted** :  TopN author that have retweeted in platform
+#' @return **topfull_message_retweeted** :  TopN message that have retweeted in platform
+#' @return **daily_stat** :  Daily Temporal data of channel statistic data
+#' @return **authors_date** :  DateTime authors activity in channel
+#' @return **links_date** :  DateTime authors activity in channel
+#' @return **hash_date** :  DateTime hashtag presence in channel
+#' @return **mentions_date** :  DateTime mentions presence in channel
+#' @return **unique_message** :  Unique message in channel
+#' @return **unique_authors** :  Unique authors in channel
+#' @return **unique_hash** :  Unique hashtag in channel
+#' @return **unique_mentions** :  Unique mentions in channel
+#' @return **unique_authors_retweeted** :  Unique retweeted user in channel
+#' @return **unique_authors_retweeter** :  Unique retweeter user in channel
+#' @return **uniquefull_authors_retweeted** :  Unique retweeted user in platform
+#' @return **uniquefull_message_retweeted** :  Unique retweeted message in platform
+#' @return **graph_retweet_df** :   Data used for retweet graph
+#' @return **graph_hash_df** :  Data used for hashtag graph
+#' @return **graph_mentions_df** :  Data for used mention graph
+#' @return **replies_df** :  Data for replies
+#' @return **graph_retweet** :   Retweet graph object as igraph R object
+#' @return **graph_mentions** :   Mention graph object as igraph R object
+#' @return **authors_favorite** :   rank of authors favorite
+#' @return **favorite_message_top** :   TopN favorite message
+#' @return **channel_data** :   Channel_data
+#' @return **channel_corpus** :   Tm Corpus of messages without mentions and links and optionally without hashtag
+#' @return **word_freq_matr** :   qdap wfm object Word frequency matrix.
 #'
 #'
 #' @author  Istituto di Biometeorologia Firenze Italy  Alfonso Crisci \email{a.crisci@@ibimet.cnr.it}
