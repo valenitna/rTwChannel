@@ -124,7 +124,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
     
   }
   
-  if (naming=="account_analitics")
+  if (naming == "account_analitics")
     {
     channel_obj=channel_obj[,1:22]
     name_user_tweet_activity=c("id","link_tweet","text","dateTime","impress","interazioni","inter_rate",
@@ -133,8 +133,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
                                "followsCount","email_send","tel_calls","mediaVisCount","interVisCount") 
     names(channel_obj)=name_user_tweet_activity
     channel_obj$data=as.Date(channel_obj$dateTime)
-    channel_obj$hour=hour(channel_obj$dateTime)
-    channel_obj$month=month(channel_obj$dateTime)
+    channel_obj$hour=lubridate::hour(channel_obj$dateTime)
+    channel_obj$month=lubridate::month(channel_obj$dateTime)
     channel_obj$screeName=account_tw
     
     }
@@ -148,19 +148,19 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   }
   #####################################################################################
   # Temporal filter of channel
-  if ( use_channel_dates==TRUE) 
+  if ( use_channel_dates == TRUE) 
     {
       start_date=channel_obj[which(channel_obj$data== min(as.Date(channel_obj$data)))];
       end_date=channel_obj[which(channel_obj$data== max(as.Date(channel_obj$data)))];
     }
   
-  if (as.Date(start_date) > as.Date(end_date)) { stop("End Date older than Start date  ")};
+  if (as.Date(start_date) > as.Date(end_date)) { stop(" End Date is older than Start date. ")};
   
   if ( temporal_check==TRUE) 
     {
     
-       if (as.Date(start_date) < as.Date(head(channel_obj$data,1))) { stop("Start Date of analisys not present." )};
-       if (as.Date(end_date) > as.Date(tail(channel_obj$data,1))) { stop("End Date of analisys not present." )};
+       if (as.Date(start_date) < as.Date(head(channel_obj$data,1))) { stop("Start Date of analisys not defined." )};
+       if (as.Date(end_date) > as.Date(tail(channel_obj$data,1))) { stop("End Date of analisys not defined." )};
        channel_obj=channel_obj[min(which(channel_obj$data==as.character(start_date))):max(which(channel_obj$data==as.character(end_date))),]
   
     }
