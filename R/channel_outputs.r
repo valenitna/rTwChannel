@@ -61,7 +61,8 @@ channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_s
                   graph_mentions_df=35,
                   authors_favorite=36,
                   favorite_message_top=37,
-                  channel_data=38
+                  channel_data=38,
+                  account_stats=39
   )
   
   res=stat_obj[[as.numeric(param_list[param])]]

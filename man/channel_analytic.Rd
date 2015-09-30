@@ -170,6 +170,8 @@ Return a R list object  for channel analisys
 **channel_corpus** :   Tm Corpus of messages without mentions and links and optionally without hashtag
 
 **word_freq_matr** :   qdap wfm object Word frequency matrix.
+
+**account_stats** :   Statistic account's activity by date.
 }
 \description{
 Extract many informative stats and object  from a set of tweet messages parsed as channel

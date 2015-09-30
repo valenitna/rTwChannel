@@ -82,7 +82,7 @@
 #' @return **channel_data** :   Channel_data
 #' @return **channel_corpus** :   Tm Corpus of messages without mentions and links and optionally without hashtag
 #' @return **word_freq_matr** :   qdap wfm object Word frequency matrix.
-#'
+#' @return **account_stats** :   Statistic account's activity by date.
 #'
 #' @author  Istituto di Biometeorologia Firenze Italy  Alfonso Crisci \email{a.crisci@@ibimet.cnr.it}
 #' @keywords  channel,stats
@@ -651,11 +651,19 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
            graph_mentions=men_graph,
            authors_favorite=rank_authors_favorite,
            favorite_message_top=head(ls_favorite_df,Ntop),
-           channel_data=channel_obj, 
+           channel_data=channel_obj,
+           account_stats=NULL,
            channel_corpus=corpus,
            word_freq_matr=word_freq_matr
-           
+         
   )
+  
+  if (naming=="account_statistics") 
+  { stats_activity=aggregate(channel_obj[,5:22], list(channel_obj$data), sum)
+    names(stats_activity)[1]="data"
+    rownames(stats_activity)=stats_activity$data
+    res$account_stats=stats_activity 
+  }
   
   return(res)
 }
