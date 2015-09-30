@@ -12,6 +12,6 @@
 #' @export
 
 trim_urls <- function(x) {
-  use::stringr
-  str_replace_all(x, 'http[^[:blank:]]+', '')
+
+  stringr::str_replace_all(x, 'http[^[:blank:]]+', '')
 }

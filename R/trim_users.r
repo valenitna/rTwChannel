@@ -12,5 +12,5 @@
 #' @export
 
 trim_users <- function(x) {
-  str_replace_all(x, '(@[[:alnum:]_]*)', '')
+  stringr::str_replace_all(x, '(@[[:alnum:]_]*)', '')
 }

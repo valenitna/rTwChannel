@@ -24,7 +24,7 @@ retrieve_annotation_keylist=function(channel="allertameteoLIG",
   web_point=paste0(repo,channel,"/",channel,"_hash_",category,".csv")
   if (target=="authors") {web_point=gsub("_hash","",web_point)}
   if (target=="geonomi") {web_point=gsub("_geonomi","",web_point)}
-  x <- try(read.csv(curl(web_point)))
+  x <- try(read.csv(curl::curl(web_point)))
   if ( class(x) != "data.frame") { stop("Verify category and target and web connection!")}
   if (target=="authors") { x$authors_full=tolower(x$authors_full)} else {x$keywords=tolower(x$keywords)};
   hash_temp=qdapTools::hash(x)

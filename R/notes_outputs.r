@@ -53,21 +53,21 @@ notes_outputs=function(daily_stat,stat_notes,prefix_file="notes",na_string="",fi
     write.csv(res$stat_full,paste0(prefix_file,"_stat_full.csv"),na=na_string,row.names = F)
   }
   if ( html == TRUE) {
-    sjt.df(res$daily_stat_df,stringVariable = "Daily_stat",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_daily_stat.html"))
+    sjPlot::sjt.df(res$daily_stat_df,stringVariable = "Daily_stat",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_daily_stat.html"))
     if ( daily_unique == TRUE) {
-    sjt.df(res$daily_stat_df_unique,stringVariable = "Daily_stat_unique",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_daily_stat_unique.html"))
+      sjPlot::sjt.df(res$daily_stat_df_unique,stringVariable = "Daily_stat_unique",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_daily_stat_unique.html"))
     }
-    sjt.df(res$stat_full,stringVariable =  "Full_stat",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_stat_full.html"))
+    sjPlot::sjt.df(res$stat_full,stringVariable =  "Full_stat",describe=FALSE,alternateRowColors = TRUE,file=paste0(prefix_file,"_stat_full.html"))
     
   }
   
   if ( excel == TRUE) {
     
-    writeWorksheetToFile(paste0(prefix_file,"_daily_stat.xls"), res$daily_stat_df, sheet=paste0("Daily_stat"))
+    XLConnect::writeWorksheetToFile(paste0(prefix_file,"_daily_stat.xls"), res$daily_stat_df, sheet=paste0("Daily_stat"))
     if ( daily_unique == TRUE) {
-    writeWorksheetToFile(paste0(prefix_file,"_daily_stat_unique.xls"), res$daily_stat_df_unique, sheet=paste0("Daily_stat_unique"))
+      XLConnect::writeWorksheetToFile(paste0(prefix_file,"_daily_stat_unique.xls"), res$daily_stat_df_unique, sheet=paste0("Daily_stat_unique"))
     }
-    writeWorksheetToFile(paste0(prefix_file,"_stat_full.xls"), res$stat_full, sheet=paste0("Full_stats"))
+    XLConnect::writeWorksheetToFile(paste0(prefix_file,"_stat_full.xls"), res$stat_full, sheet=paste0("Full_stats"))
     
   }
   

@@ -73,13 +73,13 @@ channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_s
   
   if ( html == TRUE) {
     
-    sjt.df(res,stringVariable = param,describe=FALSE,alternateRowColors = TRUE,file=paste0(param,"_",suffix_file,".html"))
+    sjPlot::sjt.df(res,stringVariable = param,describe=FALSE,alternateRowColors = TRUE,file=paste0(param,"_",suffix_file,".html"))
     
   }
   
   if ( excel == TRUE) {
     
-    writeWorksheetToFile(paste0(param,"_",suffix_file,".xls"), res, sheet=paste0(param,"_",suffix_file))
+    XLConnect::writeWorksheetToFile(paste0(param,"_",suffix_file,".xls"), res, sheet=paste0(param,"_",suffix_file))
     
   }
   

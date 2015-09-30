@@ -142,8 +142,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   if ( naming == "twitter") {
     
     channel_obj$data=as.Date(channel_obj$created)
-    channel_obj$hour=hour(channel_obj$created)
-    channel_obj$month=month(channel_obj$created)
+    channel_obj$hour=lubridate::hour(channel_obj$created)
+    channel_obj$month=lubridate::month(channel_obj$created)
     
   }
   #####################################################################################
@@ -180,12 +180,12 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
    ####################################################################################
   # Create lists to be used for count statistics.
   
-  ls_hash=lapply(channel_obj$text,FUN=function(x) rm_hash(x,extract=T))
+  ls_hash=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_hash(x,extract=T))
   ls_tag=lapply(channel_obj$text,FUN=function(x) extract_mentions(x))
   ls_links=lapply(channel_obj$text,FUN=function(x) rm_url(x, extract=TRUE))
 
-  ls_lenhash=unlist(lapply(ls_hash,FUN=function(x) ifelse(is.na(x),0, length(rm_hash(x,extract=T)[[1]]))))
-  ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(rm_url(x, extract=TRUE)[[1]]))))
+  ls_lenhash=unlist(lapply(ls_hash,FUN=function(x) ifelse(is.na(x),0, length(qdapRegexrm_hash(x,extract=T)[[1]]))))
+  ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegexrm_url(x, extract=TRUE)[[1]]))))
   ls_lentag=unlist(lapply(ls_tag,FUN=function(x) ifelse(is.na(x),0, length(extract_mentions(x)[[1]]))))
   ls_words=unlist(lapply(channel_obj$text,FUN=function(x) word_count(x)))
 
@@ -574,9 +574,9 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   
   graph_mentions_df=na.omit(ls_tag_df)
   mat_men_graph=na.omit(data.frame(whopost=graph_mentions_df[,4],whomentioned=graph_mentions_df[,2]))
-  men_graph = graph.edgelist(as.matrix(na.omit(mat_men_graph)))
+  men_graph = igraph::graph.edgelist(as.matrix(na.omit(mat_men_graph)))
   E(men_graph )$weight <- 1
-  men_graph <- simplify(men_graph, remove.loops=FALSE)
+  men_graph <- igraph::simplify(men_graph, remove.loops=FALSE)
   
   ############################################################################################################
   # Create a retweet graph
@@ -585,16 +585,16 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   
   if (naming!="account_statistics") 
   { 
-          rt_graph= graph.edgelist(as.matrix(cbind(ls_retweeted_df[,3],ls_retweeted_df[,2])))
+          rt_graph= igraph::graph.edgelist(as.matrix(cbind(ls_retweeted_df[,3],ls_retweeted_df[,2])))
           E(rt_graph )$weight <- 1
-          rt_graph <- simplify(rt_graph, remove.loops=FALSE)
+          rt_graph <- igraph::simplify(rt_graph, remove.loops=FALSE)
   }
   
   ############################################################################################################
   # Get corpus and termdocfrequency matrix as qdap object
   
   corpus=getCorpus(channel_obj$text,hashtag=corpus_hashtag)
-  word_freq_matr=wfm(corpus,stopwords=stopword)
+  word_freq_matr=qdap::wfm(corpus,stopwords=stopword)
   
   ########################################################################################
   
