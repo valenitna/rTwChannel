@@ -150,8 +150,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   # Temporal filter of channel
   if ( use_channel_dates == TRUE) 
     {
-      start_date=channel_obj$data[which(channel_obj$data== min(as.Date(channel_obj$data)))];
-      end_date=channel_obj$data[which(channel_obj$data== max(as.Date(channel_obj$data)))];
+      start_date=head(channel_obj$data[which(channel_obj$data== min(as.Date(channel_obj$data)))],1);
+      end_date=tail(channel_obj$data[which(channel_obj$data== max(as.Date(channel_obj$data)))],1);
     }
   
   if (as.Date(start_date) > as.Date(end_date)) { stop(" End Date is older than Start date. ")};
