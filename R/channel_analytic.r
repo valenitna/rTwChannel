@@ -150,8 +150,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   # Temporal filter of channel
   if ( use_channel_dates == TRUE) 
     {
-      start_date=channel_obj[which(channel_obj$data== min(as.Date(channel_obj$data)))];
-      end_date=channel_obj[which(channel_obj$data== max(as.Date(channel_obj$data)))];
+      start_date=channel_obj$data[which(channel_obj$data== min(as.Date(channel_obj$data)))];
+      end_date=channel_obj$data[which(channel_obj$data== max(as.Date(channel_obj$data)))];
     }
   
   if (as.Date(start_date) > as.Date(end_date)) { stop(" End Date is older than Start date. ")};
@@ -182,12 +182,12 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   
   ls_hash=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_hash(x,extract=T))
   ls_tag=lapply(channel_obj$text,FUN=function(x) extract_mentions(x))
-  ls_links=lapply(channel_obj$text,FUN=function(x) rm_url(x, extract=TRUE))
+  ls_links=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_url(x, extract=TRUE))
 
-  ls_lenhash=unlist(lapply(ls_hash,FUN=function(x) ifelse(is.na(x),0, length(qdapRegexrm_hash(x,extract=T)[[1]]))))
-  ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegexrm_url(x, extract=TRUE)[[1]]))))
+  ls_lenhash=unlist(lapply(ls_hash,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_hash(x,extract=T)[[1]]))))
+  ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_url(x, extract=TRUE)[[1]]))))
   ls_lentag=unlist(lapply(ls_tag,FUN=function(x) ifelse(is.na(x),0, length(extract_mentions(x)[[1]]))))
-  ls_words=unlist(lapply(channel_obj$text,FUN=function(x) word_count(x)))
+  ls_words=unlist(lapply(channel_obj$text,FUN=function(x) qdap::word_count(x)))
 
   ####################################################################################
   # Extract replies and organize a frame
