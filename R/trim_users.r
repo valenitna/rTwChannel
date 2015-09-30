@@ -12,7 +12,6 @@
 #' @export
 
 trim_users <- function(x) {
-  # remove users, i.e. "@user", in a tweet
-  require(stringr)
+   use::stringr
   str_replace_all(x, '(@[[:alnum:]_]*)', '')
 }

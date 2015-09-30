@@ -21,7 +21,7 @@ retrieve_annotation_df=function(channel="allertameteoLIG",
                                 target="hashtag",
                                 repo="https://raw.github.com/alfcrisci/twchannels_notations/master/")
 {
-  require(curl)
+  use::curl
   web_point=paste0(repo,channel,"/",channel,"_hash_",category,".csv")
   if (target=="authors") {web_point=gsub("_hash","",web_point)}
   if (target=="geonomi") {web_point=gsub("_geonomi","",web_point)}

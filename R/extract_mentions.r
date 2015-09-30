@@ -13,7 +13,7 @@
 #' @export
 
 extract_mentions=function(x) {
-  require(qdap)
+  use::qdap
   res=strip(x, digit.remove = FALSE,char.keep = c("_","@"))
   res=rm_tag(res,extract=T)
   return(res)

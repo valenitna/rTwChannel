@@ -18,7 +18,7 @@
 #' @export
 
 download_channel=function(channel,outfile,start_date,end_date,user,pass,format="csv") {
-  require(downloader)
+  use::downloader
   url_web=paste0("http://disit.org/tv/query/query.php?channel=",channel,"&start_date=",start_date,"&end_date=",end_date,"&format=",format)
   extra_web=paste0("--user ",user," --password ",pass)
   download(url_web,destfile=outfile,extra = extra_web)

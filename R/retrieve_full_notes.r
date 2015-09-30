@@ -4,7 +4,7 @@
 #'
 #' @param  channel  list  Name of channel in repository
 #' @param  label_notes  character  Vector of annotation category
-#' @param  target  character  Target of annotation ( user, hashtag, geonames or other)
+#' @param  category  character  Target of annotation ( user, hashtag, geonames or other)
 #' @param  save  logical  Save the files in rds format
 #' @param  filerds  character  Name of file of rds
 #' @return Return a qdap hash keylist  with key and category
@@ -18,8 +18,8 @@
 #'
 
 retrieve_full_notes=function(channel, label_notes,category,save=TRUE,filerds="notes.rds" ) {
-  require(curl)
-  require(qdapTools)
+  use::curl
+  use::qdapTools
   res_notes=list()
   for ( i in 1:length(label_notes)) {
     res_notes[[i]]=retrieve_annotation_keylist(channel=channel,category=label_notes[i],target=target)

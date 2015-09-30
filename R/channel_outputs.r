@@ -9,7 +9,6 @@
 #' @param  filecsv logical export csv files.
 #' @param  html logical export html sjPlot files.
 #' @param  excel logical export excel files.
-#' @param  corpus_hashtag logical Corpus not taking into account hashtag.
 #' @return Object extracted from the list of output given by \code{channel_analytic} object.
 #' @author  Istituto di Biometeorologia Firenze Italy  Alfonso Crisci \email{a.crisci@@ibimet.cnr.it}
 #' @keywords  annotation
@@ -20,10 +19,10 @@
 #'
 #'
 
-channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_string="",filecsv=FALSE, html=TRUE,excel=TRUE,corpus_hashtag=FALSE){
-  require(sjPlot)
-  require(sjmisc)
-  require(XLConnect)
+channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_string="",filecsv=FALSE, html=FALSE,excel=TRUE){
+  use::sjPlot
+  use::sjmisc
+  use::XLConnect
   options(java.parameters = "-Xmx4g" )
   param_list=list(channel_stat=1,
                   table_message=2,
@@ -61,7 +60,8 @@ channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_s
                   graph_hash_df=34,
                   graph_mentions_df=35,
                   authors_favorite=36,
-                  favorite_message_top=37
+                  favorite_message_top=37,
+                  channel_data=38
   )
   
   res=stat_obj[[as.numeric(param_list[param])]]

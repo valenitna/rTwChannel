@@ -13,8 +13,8 @@
 #' @export
 
 getCorpus <-function(textVector, hashtag=FALSE)
-{ require(tm)
-  require(qdap)
+{ use::tm
+  use::qdap
   if ( hashtag==TRUE)
   {textVector=rm_hash(textVector)}
   textVector=rm_url(textVector)
