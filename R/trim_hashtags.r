@@ -12,6 +12,5 @@
 #' @export
 
 trim_hashtags <- function(x) {
-  use::stringr
   str_replace_all(x, '(#[[:alnum:]_]*)', '')
 }

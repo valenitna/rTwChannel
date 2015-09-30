@@ -20,10 +20,7 @@
 #'
 
 channel_outputs=function(stat_obj, param="channel_stat", suffix_file="LIG", na_string="",filecsv=FALSE, html=FALSE,excel=TRUE){
-  use::sjPlot
-  use::sjmisc
-  use::XLConnect
-  options(java.parameters = "-Xmx4g" )
+   options(java.parameters = "-Xmx4g" )
   param_list=list(channel_stat=1,
                   table_message=2,
                   table_hash=3,

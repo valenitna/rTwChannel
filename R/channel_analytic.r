@@ -95,15 +95,8 @@
 
 channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="",only_original_tweet=FALSE,stopword = tm::stopwords("it"),account_tw="", corpus_hashtag=TRUE) {
   
-  #####################################################################################
   
-  use::qdap
-  use::qdapRegex
-  use::qdapTools
-  use::igraph
-  use::tm
-  use::lubridate
-  
+ 
   #####################################################################################
   # Data checks
   rows=nrow(channel_obj)

@@ -18,9 +18,7 @@
 #'
 
 retrieve_full_notes=function(channel, label_notes,category,save=TRUE,filerds="notes.rds" ) {
-  use::curl
-  use::qdapTools
-  res_notes=list()
+   res_notes=list()
   for ( i in 1:length(label_notes)) {
     res_notes[[i]]=retrieve_annotation_keylist(channel=channel,category=label_notes[i],target=target)
   }

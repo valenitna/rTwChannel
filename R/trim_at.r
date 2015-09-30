@@ -13,6 +13,5 @@
 
 
 trim_at <- function(x) {
-  use::stringr
   sub('@', '', x)
 }

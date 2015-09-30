@@ -12,6 +12,5 @@
 #' @export
 
 trim_head <- function(x) {
-  use::stringr
   sub('^(.*)?@', '', x)
 }

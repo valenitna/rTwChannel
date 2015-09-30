@@ -21,9 +21,6 @@
 #'
 
 notes_outputs=function(daily_stat,stat_notes,prefix_file="notes",na_string="",filecsv=TRUE,html=TRUE,excel=TRUE,daily_unique=FALSE){
-  require(sjPlot)
-  require(sjmisc)
-  require(XLConnect)
   options(java.parameters = "-Xmx4g")
   
   

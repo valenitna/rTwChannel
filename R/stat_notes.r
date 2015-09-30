@@ -16,9 +16,7 @@
 
 stat_notes=function (x, notes) 
 {
-    use::qdap
-    use::qdapTools
-    options(warn = -1)
+     options(warn = -1)
     x[,2] = tolower(x[,2])
     x[,2] = gsub("^@", "", x[, 2])
     label_notes = notes$y[1]
