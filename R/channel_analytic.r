@@ -11,7 +11,7 @@
 #' @param  Nmin Integer indicate the minimal data numerosity
 #' @param  naming Character Indicate which naming framework is adopted.
 #' @param  only_original_tweet Logical Taking into account only original. Default all tweets are considered.
-#' @param  lowercase logical Consider  all test as lower case. Default is FALSE.
+#' @param  lowercase logical Consider  all text as lower case. Default is FALSE.
 #' @param  stopword Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.
 #' @param  corpus_hashtag logical Corpus not taking into account the hashtag.
 #' @param  account_tw User account if naming parameter is an "account_statistics"
