@@ -11,6 +11,7 @@
 #' @param  Nmin Integer indicate the minimal data numerosity
 #' @param  naming Character Indicate which naming framework is adopted.
 #' @param  only_original_tweet Logical Taking into account only original. Default all tweets are considered.
+#' @param  lowercase logical Consider  all test as lower case. Default is FALSE.
 #' @param  stopword Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.
 #' @param  corpus_hashtag logical Corpus not taking into account the hashtag.
 #' @param  account_tw User account if naming parameter is an "account_statistics"
@@ -93,7 +94,7 @@
 #'
 #'
 
-channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="",only_original_tweet=FALSE,stopword = tm::stopwords("it"),account_tw="", corpus_hashtag=TRUE) {
+channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_date,Ntop=11,temporal_check=FALSE,Nmin=25,naming="",only_original_tweet=FALSE,lowercase=FALSE,stopword = tm::stopwords("it"),account_tw="", corpus_hashtag=TRUE) {
   
   
  
@@ -146,6 +147,12 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
     channel_obj$month=lubridate::month(channel_obj$created)
     
   }
+  
+   if ( lowercase == TRUE) {
+                            channel_obj$text=tolower(channel_obj$text)
+ 
+                            }
+                            
   #####################################################################################
   # Temporal filter of channel
   if ( use_channel_dates == TRUE) 
