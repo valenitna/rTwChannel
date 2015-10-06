@@ -28,6 +28,8 @@ channel_analytic(channel_obj, use_channel_dates = TRUE, start_date, end_date,
 
 \item{only_original_tweet}{Logical Taking into account only original. Default all tweets are considered.}
 
+\item{only_original_tweet}{Logical Consider all tweet message as lowercase. Default is FALSE.}
+
 \item{stopword}{Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.}
 
 \item{account_tw}{User account if naming parameter is an "account_statistics"}
@@ -37,9 +39,9 @@ channel_analytic(channel_obj, use_channel_dates = TRUE, start_date, end_date,
 \value{
 Return a R list object  for channel analisys
 
-**channel_stat** : channel summaries of following parameters.
+**Channel_stat** : channel summaries of following parameters.
 
-*        *N_tweets* : Number of tweet within unique ID
+*        N_tweets : Number of tweet within unique ID
 
 *        N_retweets  (channel_stat):Number of retweet
 
@@ -161,15 +163,15 @@ Return a R list object  for channel analisys
 
 **graph_mentions** :   Mention graph object as igraph R object
 
-**authors_favorite** :   rank of authors favorite
+**authors_favorite** :   Rank of authors favorite
 
 **favorite_message_top** :   TopN favorite message
 
-**channel_data** :   Channel_data
+**channel_data** :   All channel data
 
 **channel_corpus** :   Tm Corpus of messages without mentions and links and optionally without hashtag
 
-**word_freq_matr** :   qdap wfm object Word frequency matrix.
+**word_freq_matr** :   qdap wfm  Word frequency matrix.
 
 **account_stats** :   Statistic account's activity by date.
 }
