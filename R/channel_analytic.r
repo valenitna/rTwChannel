@@ -157,8 +157,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   # Temporal filter of channel
   if ( use_channel_dates == TRUE) 
     {
-      start_date=head(channel_obj$data[which(channel_obj$data== min(as.Date(channel_obj$data)))],1);
-      end_date=tail(channel_obj$data[which(channel_obj$data== max(as.Date(channel_obj$data)))],1);
+      start_date=head(channel_obj$data[which(channel_obj$data== as.character(min(as.Date(channel_obj$data))))],1);
+      end_date=tail(channel_obj$data[which(channel_obj$data== as.character(max(as.Date(channel_obj$data))))],1);
     }
   
   if (as.Date(start_date) > as.Date(end_date)) { stop(" End Date is older than Start date. ")};
@@ -171,7 +171,6 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
        channel_obj=channel_obj[min(which(channel_obj$data==as.character(start_date))):max(which(channel_obj$data==as.character(end_date))),]
   
     }
-   
   #####################################################################################
   # Create data.frames for other count statistics.
   
