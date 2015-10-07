@@ -28,7 +28,7 @@ channel_analytic(channel_obj, use_channel_dates = TRUE, start_date, end_date,
 
 \item{only_original_tweet}{Logical Taking into account only original. Default all tweets are considered.}
 
-\item{only_original_tweet}{Logical Consider all tweet message as lowercase. Default is FALSE.}
+\item{lowercase}{Logical Consider all tweet message as lowercase. Default is TRUE.}
 
 \item{stopword}{Character stopword set to be use to calculate word frequency matrix. Default italian stopwords of R tm package.}
 
