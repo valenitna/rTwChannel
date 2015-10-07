@@ -364,10 +364,10 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
   retweet_df_stats=as.data.frame.matrix(table(retweet_df$data,retweet_df$is.retweet))
   
-  if(names(retweet_df_stats)[1] =="FALSE") {names(retweet_df_stats)[1] ="false"}
-  if(names(retweet_df_stats)[1] =="TRUE") {names(retweet_df_stats)[1] ="true"}
+  if(names(retweet_df_stats)[1] =="FALSE") {names(retweet_df_stats)[1] ="Nfalse"}
+  if(names(retweet_df_stats)[2] =="TRUE") {names(retweet_df_stats)[2] ="Ntrue"}
   
-  if (only_original_tweet==TRUE) { retweet_df_stats$true=rep(0,as.numeric(nrow(retweet_df_stats)))}
+  if (only_original_tweet==TRUE) { retweet_df_stats[,2]=rep(0,as.numeric(nrow(retweet_df_stats)))}
 
   retweet_df_stats$ratio=retweet_df_stats[,2]/retweet_df_stats[,1]
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==Inf)]=NA
