@@ -371,6 +371,9 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
 
   retweet_df_stats$ratio=retweet_df_stats[,2]/retweet_df_stats[,1]
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==Inf)]=NA
+  retweet_df_stats$ratio[which(retweet_df_stats$ratio==NaN)]=NA
+  retweet_df_stats$ratio[which(is.na(retweet_df_stats$ratio))]=0
+  
   retweet_stat=data.frame(date=as.Date(rownames(retweet_df_stats)),
                           native_tweets=retweet_df_stats[,1],
                           native_retweets=retweet_df_stats[,2],
