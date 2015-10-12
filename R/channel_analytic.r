@@ -300,7 +300,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   #######################################################################################
   # Create data.frame date,retweeted_authors and authors.
   rtwed_authors=list()
-  for ( i in 1:length(channel_obj$text)) {rtwed_authors[[i]]=retweeted_users(channel_obj$text[i]}
+  for ( i in 1:length(channel_obj$text)) {rtwed_authors[[i]]=retweeted_users(channel_obj$text[i])}
                         
   ls_retweeted_df=data.frame(data=channel_obj$data,
                              retweeted_authors=unlist(rtwed_authors),
