@@ -548,8 +548,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   # Create full channel stats
   
   full_stat=data.frame(N_tweets=length(channel_obj$text),
-                       N_retweets=sum(retweet_df_stats[,2],na.rm=T),
-                       N_native_tweets=sum(retweet_df_stats[,1],na.rm=T),
+                       N_retweets=sum(retweet_stat$native_retweets,na.rm=T),
+                       N_native_tweets=sum(retweet_stat$native_tweets,na.rm=T),
                        N_hash=nrow(hash_purged),
                        N_mention=nrow(tag_purged),
                        N_links=nrow(links_purged),
@@ -563,13 +563,13 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
                        Nreplies=replies_channel_stat_sum,
                        Nfavor=sum(ls_favorite_df$N_favor,na.rm=T),
                        Ntweets0hashs = length(which(ls_lenhash==0)),
-                       Ntweets1hash = length(which(ls_lenhash==1)),
-                       NtweetsNhash = length(which(ls_lenhash>1)),
+                       Ntweets1hashs = length(which(ls_lenhash==1)),
+                       NtweetsNhashs = length(which(ls_lenhash>1)),
                        Ntweets0mentions = length(which(ls_lentag==0)),
-                       Ntweets1mention = length(which(ls_lentag==1)),
-                       NtweetsNmention = length(which(ls_lentag>1)),
+                       Ntweets1mentions = length(which(ls_lentag==1)),
+                       NtweetsNmentions = length(which(ls_lentag>1)),
                        Ntweets0links = length(which(ls_lenlinks==0)),
-                       Ntweets1link = length(which(ls_lenlinks==1)),
+                       Ntweets1links = length(which(ls_lenlinks==1)),
                        NtweetsNlinks = length(which(ls_lenlinks>1))
                     
   )
