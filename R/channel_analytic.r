@@ -362,8 +362,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   # retweet stats the ratio is ever ntive retweet/ native
   
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
-  retweet_df_stats=as.data.frame.matrix(table(retweet_df$data,retweet_df$is.retweet))
-  
+  retweet_df_stats=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))
    
   if (only_original_tweet==TRUE) { retweet_df_stats[,2]=rep(0,as.numeric(nrow(retweet_df_stats)))}
 
