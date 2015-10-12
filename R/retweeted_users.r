@@ -12,9 +12,8 @@
 #' @export
 
 retweeted_users=function(x) {
-  require (qdapRegex)
   pat<-"RT @([:alnum:]*[_]*[:alnum:]*):"
-  res = unlist(rm_default(x, pattern=pat,extract=T))
+  res = unlist(qdapRegex::rm_default(x, pattern=pat,extract=T))
   if (length(res)>1) {res=res[length(res)]}
   res = gsub("^RT @","",res)
   res = gsub(":","",res)
