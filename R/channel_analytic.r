@@ -177,9 +177,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
   
   if (only_original_tweet==TRUE) { channel_obj=channel_obj[which(ls_retweet==FALSE),]
-                                }
-  
-  if (only_original_tweet==TRUE) { ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
+                                   ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
                                  }
   
   
@@ -363,16 +361,21 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   
   check_retweet=sum(ls_retweet)
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
-  retweet_df_stats=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))
-
-  if ((only_original_tweet==FALSE) && (check_retweet == length(ls_retweet))) { retweet_df_stats$native_tweets=rep(0,as.numeric(nrow(retweet_df_stats)))}
+  retweet_df_stats=data.frame(native_tweets=rep(0,length(unique(channel_obj$data))),
+                              native_retweets=rep(0,length(unique(channel_obj$data))))
   
-  if ((only_original_tweet==TRUE) && (check_retweet == 0)) { retweet_df_stats$native_retweets=rep(0,as.numeric(nrow(retweet_df_stats)))}
   
-  names(retweet_df_stats)=c("native_tweets","native_retweets")
-
-  if (only_original_tweet==TRUE) { retweet_df_stats$native_retweets=rep(0,as.numeric(nrow(retweet_df_stats)))}
-
+  
+  if ((only_original_tweet==FALSE) && (check_retweet == length(ls_retweet))) { retweet_df_stats$native_retweets=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))[,1]
+                                                                             }
+  if ((only_original_tweet==FALSE) && (check_retweet > 0)) {retweet_df_stats$native_tweets=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))[,1];
+                                                            retweet_df_stats$native_retweets=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))[,2];
+                                                          }
+  
+  if (only_original_tweet==TRUE) {retweet_df_stats$native_tweets=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))[,1]}
+  
+ 
+ 
   retweet_df_stats$ratio=retweet_df_stats$native_retweets/retweet_df_stats$native_tweets
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==Inf)]=NA
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==NaN)]=NA
