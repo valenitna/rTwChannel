@@ -361,24 +361,19 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date, end_da
   #####################################################################################
   # retweet stats the ratio is ever ntive retweet/ native
   
-  check_retweet=sum(ls_retweet)
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
   retweet_df_stats=as.data.frame.array(table(retweet_df$data,retweet_df$is.retweet))
+   
+  if (only_original_tweet==TRUE) { retweet_df_stats[,2]=rep(0,as.numeric(nrow(retweet_df_stats)))}
 
-  if ((only_original_tweet==TRUE) && (check_retweet ==0)) { retweet_df_stats$native_retweets=rep(0,as.numeric(nrow(retweet_df_stats)))}
-  
-  names(retweet_df_stats)=c("native_tweets","native_retweets")
-
-  if (only_original_tweet==TRUE) { retweet_df_stats$native_retweets=rep(0,as.numeric(nrow(retweet_df_stats)))}
-
-  retweet_df_stats$ratio=retweet_df_stats$native_retweets/retweet_df_stats$native_tweets
+  retweet_df_stats$ratio=retweet_df_stats[,2]/retweet_df_stats[,1]
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==Inf)]=NA
   retweet_df_stats$ratio[which(retweet_df_stats$ratio==NaN)]=NA
   retweet_df_stats$ratio[which(is.na(retweet_df_stats$ratio))]=0
   
   retweet_stat=data.frame(date=as.Date(rownames(retweet_df_stats)),
-                          native_tweets=retweet_df_stats$native_tweets,
-                          native_retweets=retweet_df_stats$native_retweets,
+                          native_tweets=retweet_df_stats[,1],
+                          native_retweets=retweet_df_stats[,2],
                           retweet_ratio=retweet_df_stats$ratio)
   
   
