@@ -299,10 +299,12 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   #######################################################################################
   # Create data.frame date,retweeted_authors and authors.
-  
+  rtwed_authors=list()
+  for ( i in 1:length(channel_obj$text)) {rtwed_authors[[i]]=retweeted_users(channel_obj$text[i]}
+                        
   ls_retweeted_df=data.frame(data=channel_obj$data,
-                          retweeted_authors=sapply(channel_obj$text,FUN=function(x) retweeted_users(x)),
-                          authors=channel_obj$screeName)
+                             retweeted_authors=unlist(rtwed_authors),
+                             authors=channel_obj$screeName)
    write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
  
   #####################################################################################
