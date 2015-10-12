@@ -303,8 +303,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   ls_retweeted_df=data.frame(data=channel_obj$data,
                           retweeted_authors=sapply(channel_obj$text,FUN=function(x) retweeted_users(x)),
                           authors=channel_obj$screeName)
-  ls_retweeted_df=na.omit(ls_retweeted_df)
-  
+   write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
+ 
   #####################################################################################
   # Create data.frame date and hashtag.
   
@@ -498,7 +498,6 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   ##########################################################################
   if ((only_original_tweet==FALSE ) && (naming!="account_statistics")) 
   {
-  write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
   table_authors_retweeted=as.data.frame.array(sort(table(ls_retweeted_df$retweeted_authors),decreasing=T))
   
   table_authors_retweeted=data.frame(authors=rownames(table_authors_retweeted),
