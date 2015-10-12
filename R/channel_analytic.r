@@ -460,7 +460,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   daily_stat$Nmean_words=round(as.numeric(daily_stat$Nmean_words),2)
   daily_stat$Nmean_links=round(as.numeric(daily_stat$Nmean_links),2)
   
-   print("Daily stats calculated!\n")
+  message("Daily stats calculated!\n")
   
   #################################################################################
   # Frequency analisys
@@ -492,10 +492,13 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
     table_message$retweeted_authors[i]=retweeted_users(as.character(table_message$message[i]))
   }
   
+  message("Table_message stats calculated!\n")
+  
   
   ##########################################################################
   if ((only_original_tweet==FALSE ) && (naming!="account_statistics")) 
   {
+  write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
   table_authors_retweeted=as.data.frame.array(sort(table(ls_retweeted_df$retweeted_authors),decreasing=T))
   
   table_authors_retweeted=data.frame(authors=rownames(table_authors_retweeted),
@@ -523,7 +526,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   names(table_authors_retweeter)<-c("authors_retweeter","freq")
   rownames(table_authors_retweeter)<-NULL
-   print("Table authors retweeter stats calculated!\n")
+  print("Table authors retweeter stats calculated!\n")
  
   }
   
