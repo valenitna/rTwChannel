@@ -301,9 +301,9 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   # Create data.frame date,retweeted_authors and authors.
   
   ls_retweeted_df=data.frame(data=channel_obj$data,
-                          retweeted_authors=sapply(channel_obj$text,FUN=retweeted_users),
+                          retweeted_authors=sapply(channel_obj$text,FUN=function(x) retweeted_users(x)),
                           authors=channel_obj$screeName)
-  
+  ls_retweeted_df=na.omit(ls_retweeted_df)
   
   #####################################################################################
   # Create data.frame date and hashtag.
