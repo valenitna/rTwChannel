@@ -108,6 +108,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   if (rows < Nmin) { stop("Channel with too few records.")};
   
+ 
+  
   if ( (naming == "account_analitics") &&   (account_tw == "") ) { stop("Channel analitics need an account!")};
   
   if ( naming == "DISIT") {
@@ -458,6 +460,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   daily_stat$Nmean_words=round(as.numeric(daily_stat$Nmean_words),2)
   daily_stat$Nmean_links=round(as.numeric(daily_stat$Nmean_links),2)
   
+   print("Daily stats calculated!\n")
+  
   #################################################################################
   # Frequency analisys
   
@@ -499,6 +503,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
                                      
   names(table_authors_retweeted)<-c("authors_retweeted","freq")
   rownames(table_authors_retweeted)<-NULL
+  print("Table authors retweeted stats calculated!\n")
+  
   }
   
   if (only_original_tweet==TRUE || (naming=="account_statistics"))
@@ -517,6 +523,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   names(table_authors_retweeter)<-c("authors_retweeter","freq")
   rownames(table_authors_retweeter)<-NULL
+   print("Table authors retweeter stats calculated!\n")
+ 
   }
   
   
