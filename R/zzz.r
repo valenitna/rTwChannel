@@ -1,5 +1,5 @@
 
-.onAttach = function(libname, pkgname) {
+.onLoad = function(libname, pkgname) {
 library(curl) 
 library(qdap)
 library(qdapRegex)
