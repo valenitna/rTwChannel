@@ -104,13 +104,22 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
  
   #####################################################################################
   # Data checks
+  
   rows=nrow(channel_obj)
   
   if (rows < Nmin) { stop("Channel with too few records.")};
   
- 
+  message(paste("Channel:", deparse(substitute(channel_obj)),"\n",
+                "Elements:", rows ,"\n", 
+                "Ntop:", Ntop  ,"\n",
+                "Temporal Check:",temporal_check,"\n",
+                "Minimum data:",Nmin,"\n",
+                "Type stream:",naming,"\n",
+                "Native Channel:",only_original_tweet,"\n",
+                "Lowering case message's text:",lowercase,"\n",
+                "Account Twitter:",account_tw,"\n"))
   
-  if ( (naming == "account_analitics") &&   (account_tw == "") ) { stop("Channel analitics need an account!")};
+  if ( (naming == "account_analitics") &&   (account_tw == "") ) { stop("Channel analitics need an Twitter account!")};
   
   if ( naming == "DISIT") {
     
