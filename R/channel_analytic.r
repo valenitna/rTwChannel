@@ -109,15 +109,16 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   if (rows < Nmin) { stop("Channel with too few records.")};
   
-  message(paste("Channel:", deparse(substitute(channel_obj)),"\n",
+  message(paste(" Channel:", deparse(substitute(channel_obj)),"\n",
                 "Elements:", rows ,"\n", 
                 "Ntop:", Ntop  ,"\n",
                 "Temporal Check:",temporal_check,"\n",
                 "Minimum data:",Nmin,"\n",
                 "Type stream:",naming,"\n",
                 "Native Channel:",only_original_tweet,"\n",
-                "Lowering case message's text:",lowercase,"\n",
-                "Account Twitter:",account_tw,"\n"))
+                "Lowering case message's text:",lowercase,"\n"))
+  
+  if ( naming == "account_analitics")  {message(paste("Account Twitter:",account_tw,"\n"))}
   
   if ( (naming == "account_analitics") &&   (account_tw == "") ) { stop("Channel analitics need an Twitter account!")};
   
@@ -163,10 +164,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
     
   }
   
-   if ( lowercase == TRUE) {
-                            channel_obj$text=tolower(channel_obj$text)
- 
-                            }
+  
                             
   #####################################################################################
   # Temporal filter of channel
@@ -185,30 +183,36 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
        if (as.Date(end_date) > as.Date(tail(channel_obj$data,1))) { stop("End Date of analisys not defined." )};
        channel_obj=channel_obj[min(which(channel_obj$data==as.character(start_date))):max(which(channel_obj$data==as.character(end_date))),]
   
-    }
+  }
+  
   #####################################################################################
   # Create data.frames for other count statistics.
   
   ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
   
-  if (only_original_tweet==TRUE) { channel_obj=channel_obj[which(ls_retweet==FALSE),]
+  if (only_original_tweet==TRUE) { channel_obj=channel_obj[which(ls_retweet==0),]
                                    ls_retweet=unlist(lapply(channel_obj$text,FUN=function(x) is.retweet(x)))
                                  }
   
   
    ####################################################################################
   # Create lists to be used for count statistics.
+  ls_links=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_url(x, extract=TRUE))
+  
+  ls_retweeted_authors=sapply(channel_obj$text,FUN=function(x) retweeted_users(x));
+  
+ 
+  if ( lowercase == TRUE) {
+                           channel_obj$text=tolower(channel_obj$text)
+  }
+  
   ls_hash=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_hash(x,extract=T))
   ls_tag=lapply(channel_obj$text,FUN=function(x) extract_mentions(x))
-  ls_links=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_url(x, extract=TRUE))
-
   ls_lenhash=unlist(lapply(ls_hash,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_hash(x,extract=T)[[1]]))))
-  ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_url(x, extract=TRUE)[[1]]))))
+  ls_lenlinks=unlist(lapply(ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_url(x, extract=TRUE)[[1]]))))
   ls_lentag=unlist(lapply(ls_tag,FUN=function(x) ifelse(is.na(x),0, length(extract_mentions(x)[[1]]))))
   ls_words=unlist(lapply(channel_obj$text,FUN=function(x) qdap::word_count(x)))
-  ls_retweeted_authors=lapply(channel_obj$text,FUN=function(x) return(stringr::str_extract(x, pattern="RT @([:alnum:]*[_]*[:alnum:]*):")));
-  ls_retweeted_authors=unlist(lapply(ls_retweeted_authors,function(x) gsub(":","",gsub("^RT @","",x[1]))))
- 
+  
   message("Text message are processed!\n")
                                                                       
   #######################################################################################
@@ -380,8 +384,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   check_retweet=sum(ls_retweet)
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
-  retweet_df_stats=data.frame(native_tweets=rep(0,length(unique(channel_obj$data))),
-                              native_retweets=rep(0,length(unique(channel_obj$data))))
+  retweet_df_stats=data.frame(native_tweets=rep(0,length(levels(retweet_df$data))),
+                              native_retweets=rep(0,length(levels(retweet_df$data))))
   
   
   
@@ -450,6 +454,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   # Create a continuous data series
   
   ts_date=data.frame(date=seq.Date(as.Date(start_date),as.Date(end_date),1))
+  
   daily_stat=merge(ts_date,retweet_stat,all.x=T)
   daily_stat=merge(daily_stat,lenauthors_day_df,all.x=T)
   daily_stat=merge(daily_stat,lenhash_day_df,all.x=T)
@@ -518,7 +523,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
                                      
   names(table_authors_retweeted)<-c("authors_retweeted","freq")
   rownames(table_authors_retweeted)<-NULL
-  print("Table authors retweeted stats calculated!\n")
+  message("Table authors retweeted stats calculated!\n")
   
   }
   
@@ -538,7 +543,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   names(table_authors_retweeter)<-c("authors_retweeter","freq")
   rownames(table_authors_retweeter)<-NULL
-  print("Table authors retweeter stats calculated!\n")
+  
+  message("Table authors retweeter stats calculated!\n")
  
   }
   
@@ -582,6 +588,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   names(table_replies)<-c("replies","freq")
   rownames(table_replies)<-NULL
   
+  message("Tables of authors and replies are calculated!\n")
+  
   #########################################################################
   # Create full channel stats
   
@@ -611,6 +619,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
                        NtweetsNlinks = length(which(ls_lenlinks>1))
                     
   )
+  message("Full stats of channel are done!\n")
   
   
   ############################################################################################################
@@ -621,6 +630,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   men_graph = igraph::graph.edgelist(as.matrix(na.omit(mat_men_graph)))
   E(men_graph )$weight <- 1
   men_graph <- igraph::simplify(men_graph, remove.loops=FALSE)
+ 
+   message("Mention Graph of channel are done!\n")
   
   ############################################################################################################
   # Create a retweet graph
@@ -632,6 +643,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
           rt_graph= igraph::graph.edgelist(as.matrix(cbind(ls_retweeted_df[,3],ls_retweeted_df[,2])))
           E(rt_graph )$weight <- 1
           rt_graph <- igraph::simplify(rt_graph, remove.loops=FALSE)
+          message("Retweet  Graph of channel are done!\n")
+          
   }
   
   ############################################################################################################
@@ -639,6 +652,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   corpus=getCorpus(channel_obj$text,hashtag=corpus_hashtag)
   word_freq_matr=qdap::wfm(corpus,stopwords=stopword)
+  message("Corpus of words and frequency qdap matrix  of channel are done!\n")
   
   ########################################################################################
   
