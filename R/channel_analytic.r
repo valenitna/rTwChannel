@@ -206,13 +206,19 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_url(x, extract=TRUE)[[1]]))))
   ls_lentag=unlist(lapply(ls_tag,FUN=function(x) ifelse(is.na(x),0, length(extract_mentions(x)[[1]]))))
   ls_words=unlist(lapply(channel_obj$text,FUN=function(x) qdap::word_count(x)))
-  ls_retweeted_authors=unlist(lapply(channel_obj$text,FUN=function(x) 
-                                                      {res = unlist(qdapRegex::rm_default(x, pattern="RT @([:alnum:]*[_]*[:alnum:]*):",extract=T));
-                                                                       res=ifelse(length(res)>1, res[length(res)],res);
-                                                                       res = gsub("^RT @","",res);
-                                                                       res = gsub(":","",res);
-                                                                       return(res)}))
-
+  ls_retweeted_authors=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_default(x, pattern="RT @([:alnum:]*[_]*[:alnum:]*):",extract=T));
+  ls_retweeted_authors=unlist(lapply(ls_retweeted_authors,function(x) gsub(":","",gsub("^RT @","",x[1]))))
+  
+  message("Text message are processed!\n")
+                                                                      
+  #######################################################################################
+  # Create data.frame date,retweeted_authors and authors.
+                         
+  ls_retweeted_df=data.frame(data=channel_obj$data,
+                             retweeted_authors=as.character(ls_retweeted_authors),
+                             authors=channel_obj$screeName)
+  write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
+ 
   ####################################################################################
   # Extract replies and organize a frame
   
@@ -311,14 +317,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   names(ls_authors_df)=c("data","authors","retweet")
   
   
-  #######################################################################################
-  # Create data.frame date,retweeted_authors and authors.
-                         
-  ls_retweeted_df=data.frame(data=channel_obj$data,
-                             retweeted_authors=ls_retweeted_authors,
-                             authors=channel_obj$screeName)
-   write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
- 
+  
   #####################################################################################
   # Create data.frame date and hashtag.
   
