@@ -208,7 +208,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   ls_words=unlist(lapply(channel_obj$text,FUN=function(x) qdap::word_count(x)))
   ls_retweeted_authors=lapply(channel_obj$text,FUN=function(x) qdapRegex::rm_default(x, pattern="RT @([:alnum:]*[_]*[:alnum:]*):",extract=T));
   ls_retweeted_authors=unlist(lapply(ls_retweeted_authors,function(x) gsub(":","",gsub("^RT @","",x[1]))))
-  
+  write.csv(ls_retweeted_authors,"ls_retweeted_authors.csv",row.names=F)
+ 
   message("Text message are processed!\n")
                                                                       
   #######################################################################################
