@@ -206,9 +206,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   ls_lenlinks=unlist(lapply( ls_links,FUN=function(x) ifelse(is.na(x),0, length(qdapRegex::rm_url(x, extract=TRUE)[[1]]))))
   ls_lentag=unlist(lapply(ls_tag,FUN=function(x) ifelse(is.na(x),0, length(extract_mentions(x)[[1]]))))
   ls_words=unlist(lapply(channel_obj$text,FUN=function(x) qdap::word_count(x)))
-  ls_retweeted_authors=lapply(channel_obj$text,FUN=function(x) return(stringr::str_extract(x, pattern="RT @([:alnum:]*[_]*[:alnum:]*):",extract=T)));
+  ls_retweeted_authors=lapply(channel_obj$text,FUN=function(x) return(stringr::str_extract(x, pattern="RT @([:alnum:]*[_]*[:alnum:]*):")));
   ls_retweeted_authors=unlist(lapply(ls_retweeted_authors,function(x) gsub(":","",gsub("^RT @","",x[1]))))
-  write.csv(ls_retweeted_authors,"ls_retweeted_authors.csv",row.names=F)
  
   message("Text message are processed!\n")
                                                                       
@@ -219,8 +218,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
                              retweeted_authors=ls_retweeted_authors,
                              authors=channel_obj$screeName))
                              
-  write.csv(ls_retweeted_df,"ls_retweeted_df.csv",row.names=F)
- 
+  
   ####################################################################################
   # Extract replies and organize a frame
   
