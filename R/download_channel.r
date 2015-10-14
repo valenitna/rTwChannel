@@ -17,9 +17,8 @@
 #'
 #' @export
 
-download_channel=function(channel,outfile,start_date,end_date,user,pass,format="csv") {
+download_channel=function(channel,outfile,format,start_date,end_date,user,pass) {
    url_web=paste0("http://disit.org/tv/query/query.php?channel=",channel,"&start_date=",start_date,"&end_date=",end_date,"&format=",format)
   extra_web=paste0("--user ",user," --password ",pass)
-   download.file(url_web,destfile=outfile,extra = extra_web)
-  return(url_web)
+  download.file(url_web,destfile=outfile,method="wget",extra = extra_web)
 }
