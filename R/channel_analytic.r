@@ -384,8 +384,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   check_retweet=sum(ls_retweet)
   retweet_df=data.frame(data=channel_obj$data,is.retweet=ls_retweet)
-  retweet_df_stats=data.frame(native_tweets=rep(0,length(levels(retweet_df$data))),
-                              native_retweets=rep(0,length(levels(retweet_df$data))))
+  retweet_df_stats=data.frame(native_tweets=rep(0,length(levels(as.factor(retweet_df$data)))),
+                              native_retweets=rep(0,length(levels(as.factor(retweet_df$data)))))
   
   
   
