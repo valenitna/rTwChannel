@@ -132,13 +132,13 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
     channel_obj$ls_links=channel_obj$links
     channel_obj$id=channel_obj$twitterId
     channel_obj$message<-NULL
-    channel_obj$publicationTime<-NULL
     channel_obj$hashtagsOnTwitter<-NULL
     channel_obj$twitterId<-NULL
     channel_obj$links<-NULL
-    channel_obj$hour=hour(channel_obj$publicationTime)
-    channel_obj$month=month(channel_obj$publicationTime)
-    
+    channel_obj$hour=lubridate::hour(channel_obj$publicationTime)
+    channel_obj$month=lubridate::month(channel_obj$publicationTime)
+    channel_obj$publicationTime<-NULL
+  
   }
   
   if (naming == "account_analitics")
