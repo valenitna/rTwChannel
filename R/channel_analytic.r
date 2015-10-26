@@ -141,7 +141,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
     channel_obj$ls_hash_full<-rep(NA,nrow(channel_obj))
     channel_obj$ls_links=rep(NA,nrow(channel_obj))
     channel_obj$time<-NULL
-    channel_obj=channel_obj[rev(1:nrow(channel_obj),]
+    channel_obj=channel_obj[rev(1:nrow(channel_obj)),]
   }
   
   
