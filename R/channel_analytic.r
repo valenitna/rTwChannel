@@ -125,7 +125,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   if ( naming == "TAGS") {
     
     channel_obj$created <- lubridate::dmy_hms(channel_allertameteoTOS$time)
-    channel_obj=channel_obj[which(!is.na(channel_obj$publicationTime)),]
+    channel_obj=channel_obj[which(!is.na(channel_obj$created)),]
     channel_obj$data <- as.Date(channel_obj$created)
     channel_obj$twitterUser=channel_obj$from_user
     channel_obj$twitterId=channel_obj$id_str
@@ -141,7 +141,7 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
     channel_obj$ls_hash_full<-rep(NA,nrow(channel_obj))
     channel_obj$ls_links=rep(NA,nrow(channel_obj))
     channel_obj$time<-NULL
-
+    channel_obj=channel_obj[rev(1:nrow(channel_obj),]
   }
   
   
