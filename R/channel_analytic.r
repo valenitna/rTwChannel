@@ -122,6 +122,21 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   if ( (naming == "account_analitics") &&   (account_tw == "") ) { stop("Channel analitics need an Twitter account!")};
   
+  if ( naming == "TAGS") {
+    
+    channel_obj$text=channel_obj$message
+    channel_obj$data=as.Date(channel_obj$created_at)
+    channel_obj$screeName=channel_obj$from_user
+    channel_obj$created=channel_obj$created_at
+    channel_obj$id=channel_obj$id_str
+    channel_obj$message<-NULL
+    channel_obj$hour=lubridate::hour(channel_obj$created_at)
+    channel_obj$month=lubridate::month(channel_obj$created_at)
+    channel_obj$created_at<-NULL
+  
+  }
+  
+  
   if ( naming == "DISIT") {
     
     channel_obj$text=channel_obj$message
