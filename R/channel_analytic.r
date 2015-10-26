@@ -124,23 +124,31 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
   
   if ( naming == "TAGS") {
     
-    channel_obj$text=channel_obj$message
-    channel_obj$data=as.Date(channel_obj$created_at)
-    channel_obj$screeName=channel_obj$from_user
-    channel_obj$created=channel_obj$created_at
-    channel_obj$id=channel_obj$id_str
+    channel_obj$created <- lubridate::dmy_hms(channel_allertameteoTOS$time)
+    channel_obj=channel_obj[which(!is.na(channel_obj$publicationTime)),]
+    channel_obj$data <- as.Date(channel_obj$created)
+    channel_obj$twitterUser=channel_obj$from_user
+    channel_obj$twitterId=channel_obj$id_str
+    channel_obj$lang=channel_obj$user_lang
+    channel_obj$from_user<-NULL
+    channel_obj$user_lang<-NULL
     channel_obj$message<-NULL
-    channel_obj$hour=lubridate::hour(channel_obj$created_at)
-    channel_obj$month=lubridate::month(channel_obj$created_at)
     channel_obj$created_at<-NULL
-  
+    channel_obj$retweetCount<-rep(0,nrow(channel_obj))
+    channel_obj$entities_str<-NULL
+    channel_obj$retweetCount<-rep(0,nrow(channel_obj))
+    channel_obj$favoriteCount<-rep(0,nrow(channel_obj))
+    channel_obj$ls_hash_full<-rep(NA,nrow(channel_obj))
+    channel_obj$ls_links=rep(NA,nrow(channel_obj))
+    channel_obj$time<-NULL
+
   }
   
   
   if ( naming == "DISIT") {
     
     channel_obj$text=channel_obj$message
-    channel_obj$data=as.Date(channel_obj$publicationTime)
+    channel_obj$data=as.character(as.Date(channel_obj$publicationTime))
     channel_obj$screeName=channel_obj$twitterUser
     channel_obj$created=channel_obj$publicationTime
     channel_obj$ls_hash_full=channel_obj$hashtagsOnTwitter
