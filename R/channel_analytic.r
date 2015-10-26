@@ -127,8 +127,8 @@ channel_analytic=function(channel_obj,use_channel_dates=TRUE, start_date=NULL, e
     channel_obj$created <- lubridate::dmy_hms(channel_allertameteoTOS$time)
     channel_obj=channel_obj[which(!is.na(channel_obj$created)),]
     channel_obj$data <- as.Date(channel_obj$created)
-    channel_obj$twitterUser=channel_obj$from_user
-    channel_obj$twitterId=channel_obj$id_str
+    channel_obj$screeName=channel_obj$from_user
+    channel_obj$id=as.numeric(channel_obj$id_str)
     channel_obj$lang=channel_obj$user_lang
     channel_obj$from_user<-NULL
     channel_obj$user_lang<-NULL
