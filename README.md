@@ -1,12 +1,12 @@
 # rTwChannel
-R package for twitter stream analitics devolep with DISIT-LAMMa-IBIMET CNR collaboration.
+R package for twitter stream analitics developed within the colalboration between DISIT Lab UniFI-LAMMa-IBIMET CNR collaboration.
 
 
 To install package 
 
 ```R
 if (!require(devtools)) { install.packages("devtools")}
-devtools::install_github("alfcrisci/rTwChannel")
+devtools::install_github("valenitna/rTwChannel")
 library(rTwChannel)
 ```
 
