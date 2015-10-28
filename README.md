@@ -1,5 +1,5 @@
 # rTwChannel
-R package for twitter stream analitics developed within the colalboration between DISIT Lab UniFI-LAMMa-IBIMET CNR collaboration.
+R package for twitter stream analitics developed within the colalboration between DISIT Lab UniFI-Consorzio LaMMA-IBIMET CNR collaboration.
 
 
 To install package 
